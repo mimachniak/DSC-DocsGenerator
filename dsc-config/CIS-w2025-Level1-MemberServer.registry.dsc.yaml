@@ -1,0 +1,2572 @@
+$schema: https://aka.ms/dsc/schemas/v3/bundled/config/document.json
+resources:
+  # Section: 1.1
+  # Title: Ensure 'Relax minimum password length limits' is set to 'Enabled'
+  - name: '1.1.6 - RelaxMinimumPasswordLengthLimits'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\SAM'
+      valueName: 'RelaxMinimumPasswordLengthLimits'
+      valueData:
+        DWord: 1
+  # Section: 2.3.1
+  # Title: Ensure 'Accounts: Limit local account use of blank passwords to console logon only' is set to 'Enabled'
+  - name: '2.3.1.2 - LimitBlankPasswordUse'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa'
+      valueName: 'LimitBlankPasswordUse'
+  # Section: 2.3.2
+  # Title: Ensure 'Audit: Force audit policy subcategory settings (Windows Vista or later) to override audit policy category settings' is set to 'Enabled'
+  - name: '2.3.2.1 - SCENoApplyLegacyAuditPolicy'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa'
+      valueName: 'SCENoApplyLegacyAuditPolicy'
+      valueData:
+        DWord: 1
+  # Section: 2.3.2
+  # Title: Ensure 'Audit: Shut down system immediately if unable to log security audits' is set to 'Disabled'
+  - name: '2.3.2.2 - CrashOnAuditFail'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa'
+      valueName: 'CrashOnAuditFail'
+      valueData:
+        DWord: 0
+  # Section: 2.3.4
+  # Title: Ensure 'Devices: Prevent users from installing printer drivers' is set to 'Enabled'
+  - name: '2.3.4.1 - AddPrinterDrivers'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Print\Providers\LanMan Print Services\Servers'
+      valueName: 'AddPrinterDrivers'
+      valueData:
+        DWord: 1
+  # Section: 2.3.6
+  # Title: Ensure 'Domain member: Digitally encrypt or sign secure channel data (always)' is set to 'Enabled'
+  - name: '2.3.6.1 - RequireSignOrSeal'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters'
+      valueName: 'RequireSignOrSeal'
+      valueData:
+        DWord: 1
+  # Section: 2.3.6
+  # Title: Ensure 'Domain member: Digitally encrypt secure channel data (when possible)' is set to 'Enabled'
+  - name: '2.3.6.2 - SealSecureChannel'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters'
+      valueName: 'SealSecureChannel'
+      valueData:
+        DWord: 1
+  # Section: 2.3.6
+  # Title: Ensure 'Domain member: Digitally sign secure channel data (when possible)' is set to 'Enabled'
+  - name: '2.3.6.3 - SignSecureChannel'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters'
+      valueName: 'SignSecureChannel'
+      valueData:
+        DWord: 1
+  # Section: 2.3.6
+  # Title: Ensure 'Domain member: Disable machine account password changes' is set to 'Disabled'
+  - name: '2.3.6.4 - DisablePasswordChange'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters'
+      valueName: 'DisablePasswordChange'
+      valueData:
+        DWord: 0
+  # Section: 2.3.6
+  # Title: Ensure 'Domain member: Maximum machine account password age' is set to '30 or fewer days, but not 0'
+  - name: '2.3.6.5 - MaximumPasswordAge'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters'
+      valueName: 'MaximumPasswordAge'
+  # Section: 2.3.6
+  # Title: Ensure 'Domain member: Require strong (Windows 2000 or later) session key' is set to 'Enabled'
+  - name: '2.3.6.6 - RequireStrongKey'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters'
+      valueName: 'RequireStrongKey'
+      valueData:
+        DWord: 1
+  # Section: 2.3.7
+  # Title: Ensure 'Interactive logon: Don't display last signed-in' is set to 'Enabled'
+  - name: '2.3.7.2 - DontDisplayLastUserName'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+      valueName: 'DontDisplayLastUserName'
+      valueData:
+        DWord: 1
+  # Section: 2.3.7
+  # Title: Ensure 'Interactive logon: Machine inactivity limit' is set to '900 or fewer second(s), but not 0'
+  - name: '2.3.7.3 - InactivityTimeoutSecs'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+      valueName: 'InactivityTimeoutSecs'
+  # Section: 2.3.7
+  # Title: Configure 'Interactive logon: Message text for users attempting to log on'
+  - name: '2.3.7.4 - LegalNoticeText'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+      valueName: 'LegalNoticeText'
+      valueData:
+        String: 'text'
+  # Section: 2.3.7
+  # Title: Configure 'Interactive logon: Message title for users attempting to log on'
+  - name: '2.3.7.5 - LegalNoticeCaption'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+      valueName: 'LegalNoticeCaption'
+      valueData:
+        String: 'text'
+  # Section: 2.3.7
+  # Title: Ensure 'Interactive logon: Prompt user to change password before expiration' is set to 'between 5 and 14 days'
+  - name: '2.3.7.7 - PasswordExpiryWarning'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon'
+      valueName: 'PasswordExpiryWarning'
+  # Section: 2.3.7
+  # Title: Ensure 'Interactive logon: Require Domain Controller Authentication to unlock workstation' is set to 'Enabled' (MS only)
+  - name: '2.3.7.8 - ForceUnlockLogon'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon'
+      valueName: 'ForceUnlockLogon'
+      valueData:
+        DWord: 1
+  # Section: 2.3.7
+  # Title: Ensure 'Interactive logon: Smart card removal behavior' is set to 'Lock Workstation' or higher
+  - name: '2.3.7.9 - ScRemoveOption'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon'
+      valueName: 'ScRemoveOption'
+      valueData:
+        String: '1'
+  # Section: 2.3.8
+  # Title: Ensure 'Microsoft network client: Digitally sign communications (always)' is set to 'Enabled'
+  - name: '2.3.8.1 - RequireSecuritySignature'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters'
+      valueName: 'RequireSecuritySignature'
+      valueData:
+        DWord: 1
+  # Section: 2.3.8
+  # Title: Ensure 'Microsoft network client: Send unencrypted password to third-party SMB servers' is set to 'Disabled'
+  - name: '2.3.8.2 - EnablePlainTextPassword'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters'
+      valueName: 'EnablePlainTextPassword'
+      valueData:
+        DWord: 0
+  # Section: 2.3.9
+  # Title: Ensure 'Microsoft network server: Amount of idle time required before suspending session' is set to '15 or fewer minute(s)'
+  - name: '2.3.9.1 - AutoDisconnect'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters'
+      valueName: 'AutoDisconnect'
+  # Section: 2.3.9
+  # Title: Ensure 'Microsoft network server: Digitally sign communications (always)' is set to 'Enabled'
+  - name: '2.3.9.2 - RequireSecuritySignature'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters'
+      valueName: 'RequireSecuritySignature'
+      valueData:
+        DWord: 1
+  # Section: 2.3.9
+  # Title: Ensure 'Microsoft network server: Disconnect clients when logon hours expire' is set to 'Enabled'
+  - name: '2.3.9.3 - enableforcedlogoff'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters'
+      valueName: 'enableforcedlogoff'
+      valueData:
+        DWord: 1
+  # Section: 2.3.9
+  # Title: Ensure 'Microsoft network server: Server SPN target name validation level' is set to 'Accept if provided by client' or higher (MS only)
+  - name: '2.3.9.4 - SMBServerNameHardeningLevel'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters'
+      valueName: 'SMBServerNameHardeningLevel'
+      valueData:
+        DWord: 1
+  # Section: 2.3.10
+  # Title: Ensure 'Network access: Do not allow anonymous enumeration of SAM accounts' is set to 'Enabled' (MS only)
+  - name: '2.3.10.2 - RestrictAnonymousSAM'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa'
+      valueName: 'RestrictAnonymousSAM'
+      valueData:
+        DWord: 1
+  # Section: 2.3.10
+  # Title: Ensure 'Network access: Do not allow anonymous enumeration of SAM accounts and shares' is set to 'Enabled' (MS only)
+  - name: '2.3.10.3 - RestrictAnonymous'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa'
+      valueName: 'RestrictAnonymous'
+      valueData:
+        DWord: 1
+  # Section: 2.3.10
+  # Title: Ensure 'Network access: Let Everyone permissions apply to anonymous users' is set to 'Disabled'
+  - name: '2.3.10.5 - EveryoneIncludesAnonymous'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa'
+      valueName: 'EveryoneIncludesAnonymous'
+      valueData:
+        DWord: 0
+  # Section: 2.3.10
+  # Title: Ensure 'Network access: Named Pipes that can be accessed anonymously' is configured (MS only)
+  - name: '2.3.10.7 - NullSessionPipes'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters'
+      valueName: 'NullSessionPipes'
+  # Section: 2.3.10
+  # Title: Ensure 'Network access: Remotely accessible registry paths' is configured
+  - name: '2.3.10.8 - Machine'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurePipeServers\Winreg\AllowedExactPaths'
+      valueName: 'Machine'
+  # Section: 2.3.10
+  # Title: Ensure 'Network access: Remotely accessible registry paths and sub-paths' is configured
+  - name: '2.3.10.9 - Machine'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurePipeServers\Winreg\AllowedPaths'
+      valueName: 'Machine'
+  # Section: 2.3.10
+  # Title: Ensure 'Network access: Restrict anonymous access to Named Pipes and Shares' is set to 'Enabled'
+  - name: '2.3.10.10 - RestrictNullSessAccess'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters'
+      valueName: 'RestrictNullSessAccess'
+      valueData:
+        DWord: 1
+  # Section: 2.3.10
+  # Title: Ensure 'Network access: Restrict clients allowed to make remote calls to SAM' is set to 'Administrators: Remote Access: Allow' (MS only)
+  - name: '2.3.10.11 - restrictremotesam'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa'
+      valueName: 'restrictremotesam'
+      valueData:
+        String: 'O:BAG:BAD:(A;;RC;;;BA)'
+  # Section: 2.3.10
+  # Title: Ensure 'Network access: Shares that can be accessed anonymously' is set to 'None'
+  - name: '2.3.10.12 - NullSessionShares'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters'
+      valueName: 'NullSessionShares'
+  # Section: 2.3.10
+  # Title: Ensure 'Network access: Sharing and security model for local accounts' is set to 'Classic - local users authenticate as themselves'
+  - name: '2.3.10.13 - ForceGuest'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa'
+      valueName: 'ForceGuest'
+      valueData:
+        DWord: 0
+  # Section: 2.3.11
+  # Title: Ensure 'Network security: Allow Local System to use computer identity for NTLM' is set to 'Enabled'
+  - name: '2.3.11.1 - UseMachineId'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa'
+      valueName: 'UseMachineId'
+      valueData:
+        DWord: 1
+  # Section: 2.3.11
+  # Title: Ensure 'Network security: Allow LocalSystem NULL session fallback' is set to 'Disabled'
+  - name: '2.3.11.2 - AllowNullSessionFallback'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0'
+      valueName: 'AllowNullSessionFallback'
+      valueData:
+        DWord: 0
+  # Section: 2.3.11
+  # Title: Ensure 'Network Security: Allow PKU2U authentication requests to this computer to use online identities' is set to 'Disabled'
+  - name: '2.3.11.3 - AllowOnlineID'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\pku2u'
+      valueName: 'AllowOnlineID'
+      valueData:
+        DWord: 0
+  # Section: 2.3.11
+  # Title: Ensure 'Network security: Configure encryption types allowed for Kerberos' is set to 'AES128_HMAC_SHA1, AES256_HMAC_SHA1, Future encryption types'
+  - name: '2.3.11.4 - SupportedEncryptionTypes'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Kerberos\Parameters'
+      valueName: 'SupportedEncryptionTypes'
+      valueData:
+        DWord: 2147483640
+  # Section: 2.3.11
+  # Title: Ensure 'Network security: LAN Manager authentication level' is set to 'Send NTLMv2 response only. Refuse LM & NTLM'
+  - name: '2.3.11.6 - LmCompatibilityLevel'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa'
+      valueName: 'LmCompatibilityLevel'
+      valueData:
+        DWord: 5
+  # Section: 2.3.11
+  # Title: Ensure 'Network security: LDAP client encryption requirements' is set to 'Negotiate sealing' or higher
+  - name: '2.3.11.7 - LDAPClientConfidentiality'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LDAP'
+      valueName: 'LDAPClientConfidentiality'
+      valueData:
+        DWord: 1
+  # Section: 2.3.11
+  # Title: Ensure 'Network security: LDAP client signing requirements' is set to 'Negotiate signing' or higher
+  - name: '2.3.11.8 - LDAPClientIntegrity'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LDAP'
+      valueName: 'LDAPClientIntegrity'
+      valueData:
+        DWord: 1
+  # Section: 2.3.11
+  # Title: Ensure 'Network security: Minimum session security for NTLM SSP based (including secure RPC) clients' is set to 'Require NTLMv2 session security, Require 128-bit encryption'
+  - name: '2.3.11.9 - NTLMMinClientSec'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0'
+      valueName: 'NTLMMinClientSec'
+      valueData:
+        DWord: 537395200
+  # Section: 2.3.11
+  # Title: Ensure 'Network security: Minimum session security for NTLM SSP based (including secure RPC) servers' is set to 'Require NTLMv2 session security, Require 128-bit encryption'
+  - name: '2.3.11.10 - NTLMMinServerSec'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0'
+      valueName: 'NTLMMinServerSec'
+      valueData:
+        DWord: 537395200
+  # Section: 2.3.11
+  # Title: Ensure 'Network security: Restrict NTLM: Audit Incoming NTLM Traffic' is set to 'Enable auditing for all accounts'
+  - name: '2.3.11.11 - AuditReceivingNTLMTraffic'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0'
+      valueName: 'AuditReceivingNTLMTraffic'
+      valueData:
+        DWord: 2
+  # Section: 2.3.11
+  # Title: Ensure 'Network security: Restrict NTLM: Outgoing NTLM traffic to remote servers' is set to 'Audit all' or higher
+  - name: '2.3.11.13 - RestrictSendingNTLMTraffic'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0'
+      valueName: 'RestrictSendingNTLMTraffic'
+      valueData:
+        DWord: 1
+  # Section: 2.3.13
+  # Title: Ensure 'Shutdown: Allow system to be shut down without having to log on' is set to 'Disabled'
+  - name: '2.3.13.1 - ShutdownWithoutLogon'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+      valueName: 'ShutdownWithoutLogon'
+      valueData:
+        DWord: 0
+  # Section: 2.3.15
+  # Title: Ensure 'System objects: Require case insensitivity for non-Windows subsystems' is set to 'Enabled'
+  - name: '2.3.15.1 - ObCaseInsensitive'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel'
+      valueName: 'ObCaseInsensitive'
+      valueData:
+        DWord: 1
+  # Section: 2.3.15
+  # Title: Ensure 'System objects: Strengthen default permissions of internal system objects (e.g. Symbolic Links)' is set to 'Enabled'
+  - name: '2.3.15.2 - ProtectionMode'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager'
+      valueName: 'ProtectionMode'
+      valueData:
+        DWord: 1
+  # Section: 2.3.17
+  # Title: Ensure 'User Account Control: Admin Approval Mode for the Built-in Administrator account' is set to 'Enabled'
+  - name: '2.3.17.1 - FilterAdministratorToken'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+      valueName: 'FilterAdministratorToken'
+      valueData:
+        DWord: 1
+  # Section: 2.3.17
+  # Title: Ensure 'User Account Control: Behavior of the elevation prompt for administrators in Admin Approval Mode' is set to 'Prompt for consent on the secure desktop' or higher
+  - name: '2.3.17.2 - ConsentPromptBehaviorAdmin'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+      valueName: 'ConsentPromptBehaviorAdmin'
+      valueData:
+        DWord: 1
+  # Section: 2.3.17
+  # Title: Ensure 'User Account Control: Behavior of the elevation prompt for standard users' is set to 'Automatically deny elevation requests'
+  - name: '2.3.17.3 - ConsentPromptBehaviorUser'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+      valueName: 'ConsentPromptBehaviorUser'
+      valueData:
+        DWord: 0
+  # Section: 2.3.17
+  # Title: Ensure 'User Account Control: Detect application installations and prompt for elevation' is set to 'Enabled'
+  - name: '2.3.17.4 - EnableInstallerDetection'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+      valueName: 'EnableInstallerDetection'
+      valueData:
+        DWord: 1
+  # Section: 2.3.17
+  # Title: Ensure 'User Account Control: Only elevate UIAccess applications that are installed in secure locations' is set to 'Enabled'
+  - name: '2.3.17.5 - EnableSecureUIAPaths'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+      valueName: 'EnableSecureUIAPaths'
+      valueData:
+        DWord: 1
+  # Section: 2.3.17
+  # Title: Ensure 'User Account Control: Run all administrators in Admin Approval Mode' is set to 'Enabled'
+  - name: '2.3.17.6 - EnableLUA'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+      valueName: 'EnableLUA'
+      valueData:
+        DWord: 1
+  # Section: 2.3.17
+  # Title: Ensure 'User Account Control: Switch to the secure desktop when prompting for elevation' is set to 'Enabled'
+  - name: '2.3.17.7 - PromptOnSecureDesktop'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+      valueName: 'PromptOnSecureDesktop'
+      valueData:
+        DWord: 1
+  # Section: 2.3.17
+  # Title: Ensure 'User Account Control: Virtualize file and registry write failures to per-user locations' is set to 'Enabled'
+  - name: '2.3.17.8 - EnableVirtualization'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+      valueName: 'EnableVirtualization'
+      valueData:
+        DWord: 1
+  # Section: 9.1
+  # Title: Ensure 'Windows Firewall: Domain: Firewall state' is set to 'On (recommended)'
+  - name: '9.1.1 - EnableFirewall'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile'
+      valueName: 'EnableFirewall'
+      valueData:
+        DWord: 1
+  # Section: 9.1
+  # Title: Ensure 'Windows Firewall: Domain: Inbound connections' is set to 'Block (default)'
+  - name: '9.1.2 - DefaultInboundAction'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile'
+      valueName: 'DefaultInboundAction'
+      valueData:
+        DWord: 1
+  # Section: 9.1
+  # Title: Ensure 'Windows Firewall: Domain: Settings: Display a notification' is set to 'No'
+  - name: '9.1.3 - DisableNotifications'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile'
+      valueName: 'DisableNotifications'
+      valueData:
+        DWord: 1
+  # Section: 9.1
+  # Title: Ensure 'Windows Firewall: Domain: Logging: Name' is configured
+  - name: '9.1.4 - LogFilePath'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile\Logging'
+      valueName: 'LogFilePath'
+  # Section: 9.1
+  # Title: Ensure 'Windows Firewall: Domain: Logging: Size limit (KB)' is set to '16,384 KB or greater'
+  - name: '9.1.5 - LogFileSize'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile\Logging'
+      valueName: 'LogFileSize'
+      valueData:
+        DWord: 16384
+  # Section: 9.1
+  # Title: Ensure 'Windows Firewall: Domain: Logging: Log dropped packets' is set to 'Yes'
+  - name: '9.1.6 - LogDroppedPackets'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile\Logging'
+      valueName: 'LogDroppedPackets'
+      valueData:
+        DWord: 1
+  # Section: 9.1
+  # Title: Ensure 'Windows Firewall: Domain: Logging: Log successful connections' is set to 'Yes'
+  - name: '9.1.7 - LogSuccessfulConnections'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile\Logging'
+      valueName: 'LogSuccessfulConnections'
+      valueData:
+        DWord: 1
+  # Section: 9.2
+  # Title: Ensure 'Windows Firewall: Private: Firewall state' is set to 'On (recommended)'
+  - name: '9.2.1 - EnableFirewall'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile'
+      valueName: 'EnableFirewall'
+      valueData:
+        DWord: 1
+  # Section: 9.2
+  # Title: Ensure 'Windows Firewall: Private: Inbound connections' is set to 'Block (default)'
+  - name: '9.2.2 - DefaultInboundAction'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile'
+      valueName: 'DefaultInboundAction'
+      valueData:
+        DWord: 1
+  # Section: 9.2
+  # Title: Ensure 'Windows Firewall: Private: Settings: Display a notification' is set to 'No'
+  - name: '9.2.3 - DisableNotifications'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile'
+      valueName: 'DisableNotifications'
+      valueData:
+        DWord: 1
+  # Section: 9.2
+  # Title: Ensure 'Windows Firewall: Private: Logging: Name' is configured
+  - name: '9.2.4 - LogFilePath'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile\Logging'
+      valueName: 'LogFilePath'
+  # Section: 9.2
+  # Title: Ensure 'Windows Firewall: Private: Logging: Size limit (KB)' is set to '16,384 KB or greater'
+  - name: '9.2.5 - LogFileSize'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile\Logging'
+      valueName: 'LogFileSize'
+      valueData:
+        DWord: 16384
+  # Section: 9.2
+  # Title: Ensure 'Windows Firewall: Private: Logging: Log dropped packets' is set to 'Yes'
+  - name: '9.2.6 - LogDroppedPackets'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile\Logging'
+      valueName: 'LogDroppedPackets'
+      valueData:
+        DWord: 1
+  # Section: 9.2
+  # Title: Ensure 'Windows Firewall: Private: Logging: Log successful connections' is set to 'Yes'
+  - name: '9.2.7 - LogSuccessfulConnections'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile\Logging'
+      valueName: 'LogSuccessfulConnections'
+      valueData:
+        DWord: 1
+  # Section: 9.3
+  # Title: Ensure 'Windows Firewall: Public: Firewall state' is set to 'On (recommended)'
+  - name: '9.3.1 - EnableFirewall'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile'
+      valueName: 'EnableFirewall'
+      valueData:
+        DWord: 1
+  # Section: 9.3
+  # Title: Ensure 'Windows Firewall: Public: Inbound connections' is set to 'Block (default)'
+  - name: '9.3.2 - DefaultInboundAction'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile'
+      valueName: 'DefaultInboundAction'
+      valueData:
+        DWord: 1
+  # Section: 9.3
+  # Title: Ensure 'Windows Firewall: Public: Settings: Display a notification' is set to 'No'
+  - name: '9.3.3 - DisableNotifications'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile'
+      valueName: 'DisableNotifications'
+      valueData:
+        DWord: 1
+  # Section: 9.3
+  # Title: Ensure 'Windows Firewall: Public: Settings: Apply local firewall rules' is set to 'No'
+  - name: '9.3.4 - AllowLocalPolicyMerge'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile'
+      valueName: 'AllowLocalPolicyMerge'
+      valueData:
+        DWord: 0
+  # Section: 9.3
+  # Title: Ensure 'Windows Firewall: Public: Settings: Apply local connection security rules' is set to 'No'
+  - name: '9.3.5 - AllowLocalIPsecPolicyMerge'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile'
+      valueName: 'AllowLocalIPsecPolicyMerge'
+      valueData:
+        DWord: 0
+  # Section: 9.3
+  # Title: Ensure 'Windows Firewall: Public: Logging: Name' is configured
+  - name: '9.3.6 - LogFilePath'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile\Logging'
+      valueName: 'LogFilePath'
+  # Section: 9.3
+  # Title: Ensure 'Windows Firewall: Public: Logging: Size limit (KB)' is set to '16,384 KB or greater'
+  - name: '9.3.7 - LogFileSize'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile\Logging'
+      valueName: 'LogFileSize'
+      valueData:
+        DWord: 16384
+  # Section: 9.3
+  # Title: Ensure 'Windows Firewall: Public: Logging: Log dropped packets' is set to 'Yes'
+  - name: '9.3.8 - LogDroppedPackets'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile\Logging'
+      valueName: 'LogDroppedPackets'
+      valueData:
+        DWord: 1
+  # Section: 9.3
+  # Title: Ensure 'Windows Firewall: Public: Logging: Log successful connections' is set to 'Yes'
+  - name: '9.3.9 - LogSuccessfulConnections'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile\Logging'
+      valueName: 'LogSuccessfulConnections'
+      valueData:
+        DWord: 1
+  # Section: 18.1.1
+  # Title: Ensure 'Prevent enabling lock screen camera' is set to 'Enabled'
+  - name: '18.1.1.1 - NoLockScreenCamera'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization'
+      valueName: 'NoLockScreenCamera'
+      valueData:
+        DWord: 1
+  # Section: 18.1.1
+  # Title: Ensure 'Prevent enabling lock screen slide show' is set to 'Enabled'
+  - name: '18.1.1.2 - NoLockScreenSlideshow'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization'
+      valueName: 'NoLockScreenSlideshow'
+      valueData:
+        DWord: 1
+  # Section: 18.1.2
+  # Title: Ensure 'Allow users to enable online speech recognition services' is set to 'Disabled'
+  - name: '18.1.2.2 - AllowInputPersonalization'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\InputPersonalization'
+      valueName: 'AllowInputPersonalization'
+      valueData:
+        DWord: 0
+  # Section: 18.4
+  # Title: Ensure 'Apply UAC restrictions to local accounts on network logons' is set to 'Enabled' (MS only)
+  - name: '18.4.1 - LocalAccountTokenFilterPolicy'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+      valueName: 'LocalAccountTokenFilterPolicy'
+      valueData:
+        DWord: 0
+  # Section: 18.4
+  # Title: Ensure 'Configure SMB v1 client driver' is set to 'Enabled: Disable driver (recommended)'
+  - name: '18.4.2 - Start'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\mrxsmb10'
+      valueName: 'Start'
+      valueData:
+        DWord: 4
+  # Section: 18.4
+  # Title: Ensure 'Configure SMB v1 server' is set to 'Disabled'
+  - name: '18.4.3 - SMB1'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters'
+      valueName: 'SMB1'
+      valueData:
+        DWord: 0
+  # Section: 18.4
+  # Title: Ensure 'Enable Certificate Padding' is set to 'Enabled'
+  - name: '18.4.4 - EnableCertPaddingCheck'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Cryptography\Wintrust\Config'
+      valueName: 'EnableCertPaddingCheck'
+      valueData:
+        DWord: 1
+  # Section: 18.4
+  # Title: Ensure 'Enable Structured Exception Handling Overwrite Protection (SEHOP)' is set to 'Enabled'
+  - name: '18.4.5 - DisableExceptionChainValidation'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel'
+      valueName: 'DisableExceptionChainValidation'
+      valueData:
+        DWord: 0
+  # Section: 18.4
+  # Title: Ensure 'NetBT NodeType configuration' is set to 'Enabled: P-node (recommended)'
+  - name: '18.4.6 - NodeType'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT\Parameters'
+      valueName: 'NodeType'
+      valueData:
+        DWord: 2
+  # Section: 18.5
+  # Title: Ensure 'MSS: (AutoAdminLogon) Enable Automatic Logon' is set to 'Disabled'
+  - name: '18.5.1 - AutoAdminLogon'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon'
+      valueName: 'AutoAdminLogon'
+      valueData:
+        String: '0'
+  # Section: 18.5
+  # Title: Ensure 'MSS: (DisableIPSourceRouting IPv6) IP source routing protection level' is set to 'Enabled: Highest protection, source routing is completely disabled'
+  - name: '18.5.2 - DisableIPSourceRouting'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters'
+      valueName: 'DisableIPSourceRouting'
+      valueData:
+        DWord: 2
+  # Section: 18.5
+  # Title: Ensure 'MSS: (DisableIPSourceRouting) IP source routing protection level' is set to 'Enabled: Highest protection, source routing is completely disabled'
+  - name: '18.5.3 - DisableIPSourceRouting'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters'
+      valueName: 'DisableIPSourceRouting'
+      valueData:
+        DWord: 2
+  # Section: 18.5
+  # Title: Ensure 'MSS: (EnableICMPRedirect) Allow ICMP redirects to override OSPF generated routes' is set to 'Disabled'
+  - name: '18.5.4 - EnableICMPRedirect'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters'
+      valueName: 'EnableICMPRedirect'
+      valueData:
+        DWord: 0
+  # Section: 18.5
+  # Title: Ensure 'MSS: (NoNameReleaseOnDemand) Allow the computer to ignore NetBIOS name release requests except from WINS servers' is set to 'Enabled'
+  - name: '18.5.6 - NoNameReleaseOnDemand'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NetBT\Parameters'
+      valueName: 'NoNameReleaseOnDemand'
+      valueData:
+        DWord: 1
+  # Section: 18.5
+  # Title: Ensure 'MSS: (SafeDllSearchMode) Enable Safe DLL search mode' is set to 'Enabled'
+  - name: '18.5.8 - SafeDllSearchMode'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager'
+      valueName: 'SafeDllSearchMode'
+      valueData:
+        DWord: 1
+  # Section: 18.5
+  # Title: Ensure 'MSS: (WarningLevel) Percentage threshold for the security event log at which the system will generate a warning' is set to 'Enabled: 90% or less'
+  - name: '18.5.11 - WarningLevel'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\Security'
+      valueName: 'WarningLevel'
+      valueData:
+        DWord: 90
+  # Section: 18.6.4
+  # Title: Ensure 'Configure multicast DNS (mDNS) protocol' is set to 'Disabled'
+  - name: '18.6.4.1 - EnableMDNS'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient'
+      valueName: 'EnableMDNS'
+      valueData:
+        DWord: 0
+  # Section: 18.6.4
+  # Title: Ensure 'Configure NetBIOS settings' is set to 'Enabled: Disable NetBIOS name resolution on public networks'
+  - name: '18.6.4.2 - EnableNetbios'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient'
+      valueName: 'EnableNetbios'
+      valueData:
+        DWord: 0
+  # Section: 18.6.4
+  # Title: Ensure 'Turn off multicast name resolution' is set to 'Enabled'
+  - name: '18.6.4.4 - EnableMulticast'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient'
+      valueName: 'EnableMulticast'
+      valueData:
+        DWord: 0
+  # Section: 18.6.7
+  # Title: Ensure 'Audit client does not support encryption' is set to 'Enabled'
+  - name: '18.6.7.1 - AuditClientDoesNotSupportEncryption'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LanmanServer'
+      valueName: 'AuditClientDoesNotSupportEncryption'
+      valueData:
+        DWord: 1
+  # Section: 18.6.7
+  # Title: Ensure 'Audit client does not support signing' is set to 'Enabled'
+  - name: '18.6.7.2 - AuditClientDoesNotSupportSigning'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LanmanServer'
+      valueName: 'AuditClientDoesNotSupportSigning'
+      valueData:
+        DWord: 1
+  # Section: 18.6.7
+  # Title: Ensure 'Audit insecure guest logon' is set to 'Enabled'
+  - name: '18.6.7.3 - AuditInsecureGuestLogon'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LanmanServer'
+      valueName: 'AuditInsecureGuestLogon'
+      valueData:
+        DWord: 1
+  # Section: 18.6.7
+  # Title: Ensure 'Enable authentication rate limiter' is set to 'Enabled'
+  - name: '18.6.7.4 - EnableAuthRateLimiter'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LanmanServer'
+      valueName: 'EnableAuthRateLimiter'
+      valueData:
+        DWord: 1
+  # Section: 18.6.7
+  # Title: Ensure 'Enable remote mailslots' is set to 'Disabled'
+  - name: '18.6.7.5 - EnableMailslots'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Bowser'
+      valueName: 'EnableMailslots'
+      valueData:
+        DWord: 0
+  # Section: 18.6.7
+  # Title: Ensure 'Mandate the minimum version of SMB' is set to 'Enabled: 3.1.1'
+  - name: '18.6.7.6 - MinSmb2Dialect'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LanmanServer'
+      valueName: 'MinSmb2Dialect'
+      valueData:
+        DWord: 785
+  # Section: 18.6.7
+  # Title: Ensure 'Set authentication rate limiter delay (milliseconds)' is set to 'Enabled: 2000' or more
+  - name: '18.6.7.7 - InvalidAuthenticationDelayTimeInMs'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LanmanServer'
+      valueName: 'InvalidAuthenticationDelayTimeInMs'
+      valueData:
+        DWord: 2000
+  # Section: 18.6.8
+  # Title: Ensure 'Audit insecure guest logon' is set to 'Enabled'
+  - name: '18.6.8.1 - AuditInsecureGuestLogon'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LanmanWorkstation'
+      valueName: 'AuditInsecureGuestLogon'
+      valueData:
+        DWord: 1
+  # Section: 18.6.8
+  # Title: Ensure 'Audit server does not support encryption' is set to 'Enabled'
+  - name: '18.6.8.2 - AuditServerDoesNotSupportEncryption'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LanmanWorkstation'
+      valueName: 'AuditServerDoesNotSupportEncryption'
+      valueData:
+        DWord: 1
+  # Section: 18.6.8
+  # Title: Ensure 'Audit server does not support signing' is set to 'Enabled'
+  - name: '18.6.8.3 - AuditServerDoesNotSupportSigning'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LanmanWorkstation'
+      valueName: 'AuditServerDoesNotSupportSigning'
+      valueData:
+        DWord: 1
+  # Section: 18.6.8
+  # Title: Ensure 'Enable insecure guest logons' is set to 'Disabled'
+  - name: '18.6.8.4 - AllowInsecureGuestAuth'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LanmanWorkstation'
+      valueName: 'AllowInsecureGuestAuth'
+      valueData:
+        DWord: 0
+  # Section: 18.6.8
+  # Title: Ensure 'Enable remote mailslots' is set to 'Disabled'
+  - name: '18.6.8.5 - EnableMailslots'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\NetworkProvider'
+      valueName: 'EnableMailslots'
+      valueData:
+        DWord: 0
+  # Section: 18.6.8
+  # Title: Ensure 'Mandate the minimum version of SMB' is set to 'Enabled: 3.1.1'
+  - name: '18.6.8.6 - MinSmb2Dialect'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LanmanWorkstation'
+      valueName: 'MinSmb2Dialect'
+      valueData:
+        DWord: 785
+  # Section: 18.6.8
+  # Title: Ensure 'Require Encryption' is set to 'Enabled'
+  - name: '18.6.8.7 - RequireEncryption'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LanmanWorkstation'
+      valueName: 'RequireEncryption'
+      valueData:
+        DWord: 1
+  # Section: 18.6.11
+  # Title: Ensure 'Prohibit installation and configuration of Network Bridge on your DNS domain network' is set to 'Enabled'
+  - name: '18.6.11.2 - NC_AllowNetBridge_NLA'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Network Connections'
+      valueName: 'NC_AllowNetBridge_NLA'
+      valueData:
+        DWord: 0
+  # Section: 18.6.11
+  # Title: Ensure 'Prohibit use of Internet Connection Sharing on your DNS domain network' is set to 'Enabled'
+  - name: '18.6.11.3 - NC_ShowSharedAccessUI'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Network Connections'
+      valueName: 'NC_ShowSharedAccessUI'
+      valueData:
+        DWord: 0
+  # Section: 18.6.11
+  # Title: Ensure 'Require domain users to elevate when setting a network's location' is set to 'Enabled'
+  - name: '18.6.11.4 - NC_StdDomainUserSetLocation'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Network Connections'
+      valueName: 'NC_StdDomainUserSetLocation'
+      valueData:
+        DWord: 1
+  # Section: 18.6.14
+  # Title: Ensure 'Hardened UNC Paths' is set to 'Enabled, with "Require Mutual Authentication", "Require Integrity", and "Require Privacy" set for all NETLOGON and SYSVOL shares'
+  - name: '18.6.14.1 - \\*\NETLOGON'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\NetworkProvider\HardenedPaths'
+      valueName: '\\*\NETLOGON'
+      valueData:
+        String: 'RequireMutualAuthentication=1, RequireIntegrity=1, RequirePrivacy=1'
+  # Section: 18.6.14
+  # Title: Ensure 'Hardened UNC Paths' is set to 'Enabled, with "Require Mutual Authentication", "Require Integrity", and "Require Privacy" set for all NETLOGON and SYSVOL shares'
+  - name: '18.6.14.1 - \\*\SYSVOL'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\NetworkProvider\HardenedPaths'
+      valueName: '\\*\SYSVOL'
+      valueData:
+        String: 'RequireMutualAuthentication=1, RequireIntegrity=1, RequirePrivacy=1'
+  # Section: 18.6.21
+  # Title: Ensure 'Minimize the number of simultaneous connections to the Internet or a Windows Domain' is set to 'Enabled: 3 = Prevent Wi-Fi when on Ethernet'
+  - name: '18.6.21.1 - fMinimizeConnections'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy'
+      valueName: 'fMinimizeConnections'
+      valueData:
+        DWord: 3
+  # Section: 18.7
+  # Title: Ensure 'Allow Print Spooler to accept client connections' is set to 'Disabled'
+  - name: '18.7.1 - RegisterSpoolerRemoteRpcEndPoint'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows NT\Printers'
+      valueName: 'RegisterSpoolerRemoteRpcEndPoint'
+      valueData:
+        DWord: 2
+  # Section: 18.7
+  # Title: Ensure 'Configure Redirection Guard' is set to 'Enabled: Redirection Guard Enabled'
+  - name: '18.7.2 - RedirectionguardPolicy'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Printers'
+      valueName: 'RedirectionguardPolicy'
+      valueData:
+        DWord: 1
+  # Section: 18.7
+  # Title: Ensure 'Configure RPC connection settings: Protocol to use for outgoing RPC connections' is set to 'Enabled: RPC over TCP'
+  - name: '18.7.3 - RpcUseNamedPipeProtocol'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Printers\RPC'
+      valueName: 'RpcUseNamedPipeProtocol'
+      valueData:
+        DWord: 0
+  # Section: 18.7
+  # Title: Ensure 'Configure RPC connection settings: Use authentication for outgoing RPC connections' is set to 'Enabled: Default'
+  - name: '18.7.4 - RpcAuthentication'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Printers\RPC'
+      valueName: 'RpcAuthentication'
+      valueData:
+        DWord: 0
+  # Section: 18.7
+  # Title: Ensure 'Configure RPC listener settings: Protocols to allow for incoming RPC connections' is set to 'Enabled: RPC over TCP'
+  - name: '18.7.5 - RpcProtocols'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Printers\RPC'
+      valueName: 'RpcProtocols'
+      valueData:
+        DWord: 5
+  # Section: 18.7
+  # Title: Ensure 'Configure RPC listener settings: Authentication protocol to use for incoming RPC connections:' is set to 'Enabled: Negotiate' or higher
+  - name: '18.7.6 - ForceKerberosForRpc'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Printers\RPC'
+      valueName: 'ForceKerberosForRpc'
+      valueData:
+        DWord: 0
+  # Section: 18.7
+  # Title: Ensure 'Configure RPC over TCP port' is set to 'Enabled: 0'
+  - name: '18.7.7 - RpcTcpPort'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Printers\RPC'
+      valueName: 'RpcTcpPort'
+      valueData:
+        DWord: 0
+  # Section: 18.7
+  # Title: Ensure 'Configure RPC packet level privacy setting for incoming connections' is set to 'Enabled'
+  - name: '18.7.8 - RpcAuthnLevelPrivacyEnabled'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Print'
+      valueName: 'RpcAuthnLevelPrivacyEnabled'
+      valueData:
+        DWord: 1
+  # Section: 18.7
+  # Title: Ensure 'Limits print driver installation to Administrators' is set to 'Enabled'
+  - name: '18.7.10 - RestrictDriverInstallationToAdministrators'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Printers\PointAndPrint'
+      valueName: 'RestrictDriverInstallationToAdministrators'
+      valueData:
+        DWord: 1
+  # Section: 18.7
+  # Title: Ensure 'Manage processing of Queue-specific files' is set to 'Enabled: Limit Queue-specific files to Color profiles'
+  - name: '18.7.11 - CopyFilesPolicy'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Printers'
+      valueName: 'CopyFilesPolicy'
+      valueData:
+        DWord: 1
+  # Section: 18.7
+  # Title: Ensure 'Point and Print Restrictions: When installing drivers for a new connection' is set to 'Enabled: Show warning and elevation prompt'
+  - name: '18.7.12 - NoWarningNoElevationOnInstall'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows NT\Printers\PointAndPrint'
+      valueName: 'NoWarningNoElevationOnInstall'
+      valueData:
+        DWord: 0
+  # Section: 18.7
+  # Title: Ensure 'Point and Print Restrictions: When updating drivers for an existing connection' is set to 'Enabled: Show warning and elevation prompt'
+  - name: '18.7.13 - UpdatePromptSettings'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows NT\Printers\PointAndPrint'
+      valueName: 'UpdatePromptSettings'
+      valueData:
+        DWord: 0
+  # Section: 18.9.3
+  # Title: Ensure 'Include command line in process creation events' is set to 'Enabled'
+  - name: '18.9.3.1 - ProcessCreationIncludeCmdLine_Enabled'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Audit'
+      valueName: 'ProcessCreationIncludeCmdLine_Enabled'
+      valueData:
+        DWord: 1
+  # Section: 18.9.4
+  # Title: Ensure 'Encryption Oracle Remediation' is set to 'Enabled: Force Updated Clients'
+  - name: '18.9.4.1 - AllowEncryptionOracle'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\CredSSP\Parameters'
+      valueName: 'AllowEncryptionOracle'
+      valueData:
+        DWord: 0
+  # Section: 18.9.4
+  # Title: Ensure 'Remote host allows delegation of non-exportable credentials' is set to 'Enabled'
+  - name: '18.9.4.2 - AllowProtectedCreds'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\CredentialsDelegation'
+      valueName: 'AllowProtectedCreds'
+      valueData:
+        DWord: 1
+  # Section: 18.9.7
+  # Title: Ensure 'Prevent automatic download of applications associated with device metadata' is set to 'Enabled'
+  - name: '18.9.7.2 - PreventDeviceMetadataFromNetwork'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Device Metadata'
+      valueName: 'PreventDeviceMetadataFromNetwork'
+      valueData:
+        DWord: 1
+  # Section: 18.9.13
+  # Title: Ensure 'Boot-Start Driver Initialization Policy' is set to 'Enabled: Good, unknown and bad but critical'
+  - name: '18.9.13.1 - DriverLoadPolicy'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Policies\EarlyLaunch'
+      valueName: 'DriverLoadPolicy'
+      valueData:
+        DWord: 3
+  # Section: 18.9.17
+  # Title: Ensure 'Enable / disable CLFS logfile authentication' is set to 'Enabled'
+  - name: '18.9.17.1 - ClfsAuthenticationChecking'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Policies'
+      valueName: 'ClfsAuthenticationChecking'
+      valueData:
+        DWord: 1
+  # Section: 18.9.19
+  # Title: Ensure 'Configure security policy processing: Do not apply during periodic background processing' is set to 'Enabled: FALSE'
+  - name: '18.9.19.2 - NoBackgroundPolicy'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Group Policy\{827D319E-6EAC-11D2-A4EA-00C04F79F83A}'
+      valueName: 'NoBackgroundPolicy'
+      valueData:
+        DWord: 0
+  # Section: 18.9.19
+  # Title: Ensure 'Configure security policy processing: Process even if the Group Policy objects have not changed' is set to 'Enabled: TRUE'
+  - name: '18.9.19.3 - NoGPOListChanges'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Group Policy\{827D319E-6EAC-11D2-A4EA-00C04F79F83A}'
+      valueName: 'NoGPOListChanges'
+      valueData:
+        DWord: 0
+  # Section: 18.9.19
+  # Title: Ensure 'Continue experiences on this device' is set to 'Disabled'
+  - name: '18.9.19.4 - EnableCdp'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System'
+      valueName: 'EnableCdp'
+      valueData:
+        DWord: 0
+  # Section: 18.9.19
+  # Title: Ensure 'Turn off background refresh of Group Policy' is set to 'Disabled'
+  - name: '18.9.19.5 - DisableBkGndGroupPolicy'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+      valueName: 'DisableBkGndGroupPolicy'
+  # Section: 18.9.20.1
+  # Title: Ensure 'Turn off downloading of print drivers over HTTP' is set to 'Enabled'
+  - name: '18.9.20.1.1 - DisableWebPnPDownload'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Printers'
+      valueName: 'DisableWebPnPDownload'
+      valueData:
+        DWord: 1
+  # Section: 18.9.20.1
+  # Title: Ensure 'Turn off Internet download for Web publishing and online ordering wizards' is set to 'Enabled'
+  - name: '18.9.20.1.5 - NoWebServices'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer'
+      valueName: 'NoWebServices'
+      valueData:
+        DWord: 1
+  # Section: 18.9.24
+  # Title: Ensure 'Enumeration policy for external devices incompatible with Kernel DMA Protection' is set to 'Enabled: Block All'
+  - name: '18.9.24.1 - DeviceEnumerationPolicy'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Kernel DMA Protection'
+      valueName: 'DeviceEnumerationPolicy'
+      valueData:
+        DWord: 0
+  # Section: 18.9.26
+  # Title: Ensure 'Configure password backup directory' is set to 'Enabled: Active Directory' or 'Enabled: Azure Active Directory'
+  - name: '18.9.26.1 - BackupDirectory'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS'
+      valueName: 'BackupDirectory'
+      valueData:
+        DWord: 1
+  # Section: 18.9.26
+  # Title: Ensure 'Do not allow password expiration time longer than required by policy' is set to 'Enabled'
+  - name: '18.9.26.2 - PasswordExpirationProtectionEnabled'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS'
+      valueName: 'PasswordExpirationProtectionEnabled'
+      valueData:
+        DWord: 1
+  # Section: 18.9.26
+  # Title: Ensure 'Enable password encryption' is set to 'Enabled'
+  - name: '18.9.26.3 - ADPasswordEncryptionEnabled'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS'
+      valueName: 'ADPasswordEncryptionEnabled'
+      valueData:
+        DWord: 1
+  # Section: 18.9.26
+  # Title: Ensure 'Password Settings: Password Complexity' is set to 'Enabled: Large letters + small letters + numbers + special characters' or 'Passphrase'
+  - name: '18.9.26.4 - PasswordComplexity'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS'
+      valueName: 'PasswordComplexity'
+      valueData:
+        DWord: 4
+  # Section: 18.9.26
+  # Title: Ensure 'Password Settings: Password Length' is set to 'Enabled: 15 or more'
+  - name: '18.9.26.5 - PasswordLength'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS'
+      valueName: 'PasswordLength'
+      valueData:
+        DWord: 15
+  # Section: 18.9.26
+  # Title: Ensure 'Password Settings: Password Age (Days)' is set to 'Enabled: 30 or fewer'
+  - name: '18.9.26.6 - PasswordAgeDays'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS'
+      valueName: 'PasswordAgeDays'
+      valueData:
+        DWord: 30
+  # Section: 18.9.26
+  # Title: Ensure 'Post-authentication actions: Grace period (hours)' is set to 'Enabled: 8 or fewer hours, but not 0'
+  - name: '18.9.26.7 - PostAuthenticationResetDelay'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS'
+      valueName: 'PostAuthenticationResetDelay'
+  # Section: 18.9.26
+  # Title: Ensure 'Post-authentication actions: Actions' is set to 'Enabled: Reset the password and logoff the managed account' or higher
+  - name: '18.9.26.8 - PostAuthenticationActions'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\LAPS'
+      valueName: 'PostAuthenticationActions'
+      valueData:
+        DWord: 3
+  # Section: 18.9.29
+  # Title: Ensure 'Block user from showing account details on sign-in' is set to 'Enabled'
+  - name: '18.9.29.1 - BlockUserFromShowingAccountDetailsOnSignin'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System'
+      valueName: 'BlockUserFromShowingAccountDetailsOnSignin'
+      valueData:
+        DWord: 1
+  # Section: 18.9.29
+  # Title: Ensure 'Do not display network selection UI' is set to 'Enabled'
+  - name: '18.9.29.2 - DontDisplayNetworkSelectionUI'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System'
+      valueName: 'DontDisplayNetworkSelectionUI'
+      valueData:
+        DWord: 1
+  # Section: 18.9.29
+  # Title: Ensure 'Do not enumerate connected users on domain-joined computers' is set to 'Enabled'
+  - name: '18.9.29.3 - DontEnumerateConnectedUsers'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System'
+      valueName: 'DontEnumerateConnectedUsers'
+      valueData:
+        DWord: 1
+  # Section: 18.9.29
+  # Title: Ensure 'Enumerate local users on domain-joined computers' is set to 'Disabled' (MS only)
+  - name: '18.9.29.4 - EnumerateLocalUsers'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System'
+      valueName: 'EnumerateLocalUsers'
+      valueData:
+        DWord: 0
+  # Section: 18.9.29
+  # Title: Ensure 'Turn off app notifications on the lock screen' is set to 'Enabled'
+  - name: '18.9.29.5 - DisableLockScreenAppNotifications'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System'
+      valueName: 'DisableLockScreenAppNotifications'
+      valueData:
+        DWord: 1
+  # Section: 18.9.29
+  # Title: Ensure 'Turn on convenience PIN sign-in' is set to 'Disabled'
+  - name: '18.9.29.6 - AllowDomainPINLogon'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System'
+      valueName: 'AllowDomainPINLogon'
+      valueData:
+        DWord: 0
+  # Section: 18.9.31.1
+  # Title: Ensure 'Block NetBIOS-based discovery for domain controller location' is set to 'Enabled'
+  - name: '18.9.31.1.1 - BlockNetbiosDiscovery'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Netlogon\Parameters'
+      valueName: 'BlockNetbiosDiscovery'
+      valueData:
+        DWord: 1
+  # Section: 18.9.35.6
+  # Title: Ensure 'Require a password when a computer wakes (on battery)' is set to 'Enabled'
+  - name: '18.9.35.6.3 - DCSettingIndex'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0e796bdb-100d-47d6-a2d5-f7d2daa51f51'
+      valueName: 'DCSettingIndex'
+      valueData:
+        DWord: 1
+  # Section: 18.9.35.6
+  # Title: Ensure 'Require a password when a computer wakes (plugged in)' is set to 'Enabled'
+  - name: '18.9.35.6.4 - ACSettingIndex'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0e796bdb-100d-47d6-a2d5-f7d2daa51f51'
+      valueName: 'ACSettingIndex'
+      valueData:
+        DWord: 1
+  # Section: 18.9.37
+  # Title: Ensure 'Configure Offer Remote Assistance' is set to 'Disabled'
+  - name: '18.9.37.1 - fAllowUnsolicited'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
+      valueName: 'fAllowUnsolicited'
+      valueData:
+        DWord: 0
+  # Section: 18.9.37
+  # Title: Ensure 'Configure Solicited Remote Assistance' is set to 'Disabled'
+  - name: '18.9.37.2 - fAllowToGetHelp'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
+      valueName: 'fAllowToGetHelp'
+      valueData:
+        DWord: 0
+  # Section: 18.9.38
+  # Title: Ensure 'Enable RPC Endpoint Mapper Client Authentication' is set to 'Enabled' (MS only)
+  - name: '18.9.38.1 - EnableAuthEpResolution'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Rpc'
+      valueName: 'EnableAuthEpResolution'
+      valueData:
+        DWord: 1
+  # Section: 18.9.41
+  # Title: Ensure 'Configure SAM change password RPC methods policy' is set to 'Enabled: Block all change password RPC methods' (MS only)
+  - name: '18.9.41.3 - SamrChangeUserPasswordApiPolicy'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\SAM'
+      valueName: 'SamrChangeUserPasswordApiPolicy'
+      valueData:
+        DWord: 1
+  # Section: 18.9.53.1
+  # Title: Ensure 'Enable Windows NTP Client' is set to 'Enabled'
+  - name: '18.9.53.1.1 - Enabled'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpClient'
+      valueName: 'Enabled'
+      valueData:
+        DWord: 1
+  # Section: 18.9.53.1
+  # Title: Ensure 'Enable Windows NTP Server' is set to 'Disabled' (MS only)
+  - name: '18.9.53.1.2 - Enabled'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\W32Time\TimeProviders\NtpServer'
+      valueName: 'Enabled'
+      valueData:
+        DWord: 0
+  # Section: 18.10.4
+  # Title: Ensure 'Not allow per-user unsigned packages to install by default (requires explicitly allow per install)' is set to 'Enabled'
+  - name: '18.10.4.2 - DisablePerUserUnsignedPackagesByDefault'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Appx'
+      valueName: 'DisablePerUserUnsignedPackagesByDefault'
+      valueData:
+        DWord: 1
+  # Section: 18.10.6
+  # Title: Ensure 'Allow Microsoft accounts to be optional' is set to 'Enabled'
+  - name: '18.10.6.1 - MSAOptional'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+      valueName: 'MSAOptional'
+      valueData:
+        DWord: 1
+  # Section: 18.10.8
+  # Title: Ensure 'Disallow Autoplay for non-volume devices' is set to 'Enabled'
+  - name: '18.10.8.1 - NoAutoplayfornonVolume'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer'
+      valueName: 'NoAutoplayfornonVolume'
+      valueData:
+        DWord: 1
+  # Section: 18.10.8
+  # Title: Ensure 'Set the default behavior for AutoRun' is set to 'Enabled: Do not execute any autorun commands'
+  - name: '18.10.8.2 - NoAutorun'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer'
+      valueName: 'NoAutorun'
+      valueData:
+        DWord: 1
+  # Section: 18.10.8
+  # Title: Ensure 'Turn off Autoplay' is set to 'Enabled: All drives'
+  - name: '18.10.8.3 - NoDriveTypeAutoRun'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer'
+      valueName: 'NoDriveTypeAutoRun'
+      valueData:
+        DWord: 255
+  # Section: 18.10.9.1
+  # Title: Ensure 'Configure enhanced anti-spoofing' is set to 'Enabled'
+  - name: '18.10.9.1.1 - EnhancedAntiSpoofing'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Biometrics\FacialFeatures'
+      valueName: 'EnhancedAntiSpoofing'
+      valueData:
+        DWord: 1
+  # Section: 18.10.13
+  # Title: Ensure 'Turn off cloud consumer account state content' is set to 'Enabled'
+  - name: '18.10.13.1 - DisableConsumerAccountStateContent'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\CloudContent'
+      valueName: 'DisableConsumerAccountStateContent'
+      valueData:
+        DWord: 1
+  # Section: 18.10.14
+  # Title: Ensure 'Require pin for pairing' is set to 'Enabled: First Time' OR 'Enabled: Always'
+  - name: '18.10.14.1 - RequirePinForPairing'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Connect'
+      valueName: 'RequirePinForPairing'
+      valueData:
+        DWord: 1
+  # Section: 18.10.15
+  # Title: Ensure 'Do not display the password reveal button' is set to 'Enabled'
+  - name: '18.10.15.1 - DisablePasswordReveal'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\CredUI'
+      valueName: 'DisablePasswordReveal'
+      valueData:
+        DWord: 1
+  # Section: 18.10.15
+  # Title: Ensure 'Enumerate administrator accounts on elevation' is set to 'Disabled'
+  - name: '18.10.15.2 - EnumerateAdministrators'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\CredUI'
+      valueName: 'EnumerateAdministrators'
+      valueData:
+        DWord: 0
+  # Section: 18.10.16
+  # Title: Ensure 'Allow Diagnostic Data' is set to 'Enabled: Diagnostic data off (not recommended)' or 'Enabled: Send required diagnostic data'
+  - name: '18.10.16.1 - AllowTelemetry'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection'
+      valueName: 'AllowTelemetry'
+      valueData:
+        DWord: 0
+  # Section: 18.10.16
+  # Title: Ensure 'Do not show feedback notifications' is set to 'Enabled'
+  - name: '18.10.16.3 - DoNotShowFeedbackNotifications'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection'
+      valueName: 'DoNotShowFeedbackNotifications'
+      valueData:
+        DWord: 1
+  # Section: 18.10.18
+  # Title: Ensure 'Enable App Installer Experimental Features' is set to 'Disabled'
+  - name: '18.10.18.2 - EnableExperimentalFeatures'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppInstaller'
+      valueName: 'EnableExperimentalFeatures'
+      valueData:
+        DWord: 0
+  # Section: 18.10.18
+  # Title: Ensure 'Enable App Installer Hash Override' is set to 'Disabled'
+  - name: '18.10.18.3 - EnableHashOverride'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppInstaller'
+      valueName: 'EnableHashOverride'
+      valueData:
+        DWord: 0
+  # Section: 18.10.18
+  # Title: Ensure 'Enable App Installer Local Archive Malware Scan Override' is set to 'Disabled'
+  - name: '18.10.18.4 - EnableLocalArchiveMalwareScanOverride'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppInstaller'
+      valueName: 'EnableLocalArchiveMalwareScanOverride'
+      valueData:
+        DWord: 0
+  # Section: 18.10.18
+  # Title: Ensure 'Enable App Installer ms-appinstaller protocol' is set to 'Disabled'
+  - name: '18.10.18.5 - EnableMSAppInstallerProtocol'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppInstaller'
+      valueName: 'EnableMSAppInstallerProtocol'
+      valueData:
+        DWord: 0
+  # Section: 18.10.18
+  # Title: Ensure 'Enable App Installer Microsoft Store Source Certificate Validation Bypass' is set to 'Disabled'
+  - name: '18.10.18.6 - EnableBypassCertificatePinningForMicrosoftStore'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppInstaller'
+      valueName: 'EnableBypassCertificatePinningForMicrosoftStore'
+      valueData:
+        DWord: 0
+  # Section: 18.10.26.1
+  # Title: Ensure 'Application: Control Event Log behavior when the log file reaches its maximum size' is set to 'Disabled'
+  - name: '18.10.26.1.1 - Retention'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Application'
+      valueName: 'Retention'
+      valueData:
+        String: '0'
+  # Section: 18.10.26.1
+  # Title: Ensure 'Application: Specify the maximum log file size (KB)' is set to 'Enabled: 32,768 or greater'
+  - name: '18.10.26.1.2 - MaxSize'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Application'
+      valueName: 'MaxSize'
+      valueData:
+        DWord: 32768
+  # Section: 18.10.26.2
+  # Title: Ensure 'Security: Control Event Log behavior when the log file reaches its maximum size' is set to 'Disabled'
+  - name: '18.10.26.2.1 - Retention'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Security'
+      valueName: 'Retention'
+      valueData:
+        String: '0'
+  # Section: 18.10.26.2
+  # Title: Ensure 'Security: Specify the maximum log file size (KB)' is set to 'Enabled: 196,608 or greater'
+  - name: '18.10.26.2.2 - MaxSize'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Security'
+      valueName: 'MaxSize'
+      valueData:
+        DWord: 196608
+  # Section: 18.10.26.3
+  # Title: Ensure 'Setup: Control Event Log behavior when the log file reaches its maximum size' is set to 'Disabled'
+  - name: '18.10.26.3.1 - Retention'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Setup'
+      valueName: 'Retention'
+      valueData:
+        String: '0'
+  # Section: 18.10.26.3
+  # Title: Ensure 'Setup: Specify the maximum log file size (KB)' is set to 'Enabled: 32,768 or greater'
+  - name: '18.10.26.3.2 - MaxSize'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Setup'
+      valueName: 'MaxSize'
+      valueData:
+        DWord: 32768
+  # Section: 18.10.26.4
+  # Title: Ensure 'System: Control Event Log behavior when the log file reaches its maximum size' is set to 'Disabled'
+  - name: '18.10.26.4.1 - Retention'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\System'
+      valueName: 'Retention'
+      valueData:
+        String: '0'
+  # Section: 18.10.26.4
+  # Title: Ensure 'System: Specify the maximum log file size (KB)' is set to 'Enabled: 32,768 or greater'
+  - name: '18.10.26.4.2 - MaxSize'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\System'
+      valueName: 'MaxSize'
+      valueData:
+        DWord: 32768
+  # Section: 18.10.29
+  # Title: Ensure 'Do not apply the Mark of the Web tag to files copied from insecure sources' is set to 'Disabled'
+  - name: '18.10.29.2 - DisableMotWOnInsecurePathCopy'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer'
+      valueName: 'DisableMotWOnInsecurePathCopy'
+      valueData:
+        DWord: 0
+  # Section: 18.10.29
+  # Title: Ensure 'Turn off Data Execution Prevention for Explorer' is set to 'Disabled'
+  - name: '18.10.29.3 - NoDataExecutionPrevention'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer'
+      valueName: 'NoDataExecutionPrevention'
+      valueData:
+        DWord: 0
+  # Section: 18.10.29
+  # Title: Ensure 'Turn off heap termination on corruption' is set to 'Disabled'
+  - name: '18.10.29.4 - NoHeapTerminationOnCorruption'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer'
+      valueName: 'NoHeapTerminationOnCorruption'
+      valueData:
+        DWord: 0
+  # Section: 18.10.29
+  # Title: Ensure 'Turn off shell protocol protected mode' is set to 'Disabled'
+  - name: '18.10.29.5 - PreXPSP2ShellProtocolBehavior'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer'
+      valueName: 'PreXPSP2ShellProtocolBehavior'
+      valueData:
+        DWord: 0
+  # Section: 18.10.41
+  # Title: Ensure 'Block all consumer Microsoft account user authentication' is set to 'Enabled'
+  - name: '18.10.41.1 - DisableUserAuth'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\MicrosoftAccount'
+      valueName: 'DisableUserAuth'
+      valueData:
+        DWord: 1
+  # Section: 18.10.42
+  # Title: Ensure 'Configure detection for potentially unwanted applications' is set to 'Enabled: Block'
+  - name: '18.10.42.16 - PUAProtection'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender'
+      valueName: 'PUAProtection'
+      valueData:
+        DWord: 1
+  # Section: 18.10.42
+  # Title: Ensure 'Control whether exclusions are visible to local users' is set to 'Enabled'
+  - name: '18.10.42.17 - HideExclusionsFromLocalUsers'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender'
+      valueName: 'HideExclusionsFromLocalUsers'
+      valueData:
+        DWord: 1
+  # Section: 18.10.42.4
+  # Title: Ensure 'Enable EDR in block mode' is set to 'Enabled'
+  - name: '18.10.42.4.1 - PassiveRemediation'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Features'
+      valueName: 'PassiveRemediation'
+      valueData:
+        DWord: 1
+  # Section: 18.10.42.5
+  # Title: Ensure 'Configure local setting override for reporting to Microsoft MAPS' is set to 'Disabled'
+  - name: '18.10.42.5.1 - LocalSettingOverrideSpynetReporting'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet'
+      valueName: 'LocalSettingOverrideSpynetReporting'
+      valueData:
+        DWord: 0
+  # Section: 18.10.42.5
+  # Title: Ensure 'Join Microsoft MAPS' is set to 'Enabled: Advanced'
+  - name: '18.10.42.5.2 - SpynetReporting'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet'
+      valueName: 'SpynetReporting'
+      valueData:
+        DWord: 2
+  # Section: 18.10.42.6.1
+  # Title: Ensure 'Configure Attack Surface Reduction rules' is set to 'Enabled'
+  - name: '18.10.42.6.1.1 - ExploitGuard_ASR_Rules'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR'
+      valueName: 'ExploitGuard_ASR_Rules'
+      valueData:
+        DWord: 1
+  # Section: 18.10.42.6.1
+  # Title: Ensure 'Configure Attack Surface Reduction rules: Set the state for each ASR rule' is configured
+  - name: '18.10.42.6.1.2 - 26190899-1602-49e8-8b27-eb1d0a1ce869'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR\Rules'
+      valueName: '26190899-1602-49e8-8b27-eb1d0a1ce869'
+      valueData:
+        String: '1'
+  # Section: 18.10.42.6.1
+  # Title: Ensure 'Configure Attack Surface Reduction rules: Set the state for each ASR rule' is configured
+  - name: '18.10.42.6.1.2 - 3b576869-a4ec-4529-8536-b80a7769e899'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR\Rules'
+      valueName: '3b576869-a4ec-4529-8536-b80a7769e899'
+      valueData:
+        String: '1'
+  # Section: 18.10.42.6.1
+  # Title: Ensure 'Configure Attack Surface Reduction rules: Set the state for each ASR rule' is configured
+  - name: '18.10.42.6.1.2 - 56a863a9-875e-4185-98a7-b882c64b5ce5'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR\Rules'
+      valueName: '56a863a9-875e-4185-98a7-b882c64b5ce5'
+      valueData:
+        String: '1'
+  # Section: 18.10.42.6.1
+  # Title: Ensure 'Configure Attack Surface Reduction rules: Set the state for each ASR rule' is configured
+  - name: '18.10.42.6.1.2 - 5beb7efe-fd9a-4556-801d-275e5ffc04cc'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR\Rules'
+      valueName: '5beb7efe-fd9a-4556-801d-275e5ffc04cc'
+      valueData:
+        String: '1'
+  # Section: 18.10.42.6.1
+  # Title: Ensure 'Configure Attack Surface Reduction rules: Set the state for each ASR rule' is configured
+  - name: '18.10.42.6.1.2 - 75668c1f-73b5-4cf0-bb93-3ecf5cb7cc84'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR\Rules'
+      valueName: '75668c1f-73b5-4cf0-bb93-3ecf5cb7cc84'
+      valueData:
+        String: '1'
+  # Section: 18.10.42.6.1
+  # Title: Ensure 'Configure Attack Surface Reduction rules: Set the state for each ASR rule' is configured
+  - name: '18.10.42.6.1.2 - 7674ba52-37eb-4a4f-a9a1-f0f9a1619a2c'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR\Rules'
+      valueName: '7674ba52-37eb-4a4f-a9a1-f0f9a1619a2c'
+      valueData:
+        String: '1'
+  # Section: 18.10.42.6.1
+  # Title: Ensure 'Configure Attack Surface Reduction rules: Set the state for each ASR rule' is configured
+  - name: '18.10.42.6.1.2 - 9e6c4e1f-7d60-472f-ba1a-a39ef669e4b2'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR\Rules'
+      valueName: '9e6c4e1f-7d60-472f-ba1a-a39ef669e4b2'
+      valueData:
+        String: '1'
+  # Section: 18.10.42.6.1
+  # Title: Ensure 'Configure Attack Surface Reduction rules: Set the state for each ASR rule' is configured
+  - name: '18.10.42.6.1.2 - b2b3f03d-6a65-4f7b-a9c7-1c7ef74a9ba4'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR\Rules'
+      valueName: 'b2b3f03d-6a65-4f7b-a9c7-1c7ef74a9ba4'
+      valueData:
+        String: '1'
+  # Section: 18.10.42.6.1
+  # Title: Ensure 'Configure Attack Surface Reduction rules: Set the state for each ASR rule' is configured
+  - name: '18.10.42.6.1.2 - be9ba2d9-53ea-4cdc-84e5-9b1eeee46550'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR\Rules'
+      valueName: 'be9ba2d9-53ea-4cdc-84e5-9b1eeee46550'
+      valueData:
+        String: '1'
+  # Section: 18.10.42.6.1
+  # Title: Ensure 'Configure Attack Surface Reduction rules: Set the state for each ASR rule' is configured
+  - name: '18.10.42.6.1.2 - d3e037e1-3eb8-44c8-a917-57927947596d'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR\Rules'
+      valueName: 'd3e037e1-3eb8-44c8-a917-57927947596d'
+      valueData:
+        String: '1'
+  # Section: 18.10.42.6.1
+  # Title: Ensure 'Configure Attack Surface Reduction rules: Set the state for each ASR rule' is configured
+  - name: '18.10.42.6.1.2 - d4f940ab-401b-4efc-aadc-ad5f3c50688a'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR\Rules'
+      valueName: 'd4f940ab-401b-4efc-aadc-ad5f3c50688a'
+      valueData:
+        String: '1'
+  # Section: 18.10.42.6.1
+  # Title: Ensure 'Configure Attack Surface Reduction rules: Set the state for each ASR rule' is configured
+  - name: '18.10.42.6.1.2 - e6db77e5-3df2-4cf1-b95a-636979351e5b'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR\Rules'
+      valueName: 'e6db77e5-3df2-4cf1-b95a-636979351e5b'
+      valueData:
+        String: '1'
+  # Section: 18.10.42.6.3
+  # Title: Ensure 'Prevent users and apps from accessing dangerous websites' is set to 'Enabled: Block'
+  - name: '18.10.42.6.3.1 - EnableNetworkProtection'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\Network Protection'
+      valueName: 'EnableNetworkProtection'
+      valueData:
+        DWord: 1
+  # Section: 18.10.42.7
+  # Title: Ensure 'Enable file hash computation feature' is set to 'Enabled'
+  - name: '18.10.42.7.1 - EnableFileHashComputation'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\MpEngine'
+      valueName: 'EnableFileHashComputation'
+      valueData:
+        DWord: 1
+  # Section: 18.10.42.10
+  # Title: Ensure 'Configure real-time protection and Security Intelligence Updates during OOBE' is set to 'Enabled'
+  - name: '18.10.42.10.1 - OobeEnableRtpAndSigUpdate'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection'
+      valueName: 'OobeEnableRtpAndSigUpdate'
+      valueData:
+        DWord: 1
+  # Section: 18.10.42.10
+  # Title: Ensure 'Scan all downloaded files and attachments' is set to 'Enabled'
+  - name: '18.10.42.10.2 - DisableIOAVProtection'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection'
+      valueName: 'DisableIOAVProtection'
+      valueData:
+        DWord: 0
+  # Section: 18.10.42.10
+  # Title: Ensure 'Turn off real-time protection' is set to 'Disabled'
+  - name: '18.10.42.10.3 - DisableRealtimeMonitoring'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection'
+      valueName: 'DisableRealtimeMonitoring'
+      valueData:
+        DWord: 0
+  # Section: 18.10.42.10
+  # Title: Ensure 'Turn on behavior monitoring' is set to 'Enabled'
+  - name: '18.10.42.10.4 - DisableBehaviorMonitoring'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection'
+      valueName: 'DisableBehaviorMonitoring'
+      valueData:
+        DWord: 0
+  # Section: 18.10.42.10
+  # Title: Ensure 'Turn on script scanning' is set to 'Enabled'
+  - name: '18.10.42.10.5 - DisableScriptScanning'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection'
+      valueName: 'DisableScriptScanning'
+      valueData:
+        DWord: 0
+  # Section: 18.10.42.11.1.1
+  # Title: Ensure 'Configure Remote Encryption Protection Mode' is set to 'Enabled: Audit' or higher
+  - name: '18.10.42.11.1.1.2 - BruteForceProtectionConfiguredState'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Remediation\Behavioral Network Blocks\Brute Force Protection'
+      valueName: 'BruteForceProtectionConfiguredState'
+  # Section: 18.10.42.13
+  # Title: Ensure 'Scan excluded files and directories during quick scans' is set to 'Enabled: 1'
+  - name: '18.10.42.13.1 - QuickScanIncludeExclusions'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Scan'
+      valueName: 'QuickScanIncludeExclusions'
+      valueData:
+        DWord: 1
+  # Section: 18.10.42.13
+  # Title: Ensure 'Scan packed executables' is set to 'Enabled'
+  - name: '18.10.42.13.2 - DisablePackedExeScanning'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Scan'
+      valueName: 'DisablePackedExeScanning'
+      valueData:
+        DWord: 0
+  # Section: 18.10.42.13
+  # Title: Ensure 'Scan removable drives' is set to 'Enabled'
+  - name: '18.10.42.13.3 - DisableRemovableDriveScanning'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Scan'
+      valueName: 'DisableRemovableDriveScanning'
+      valueData:
+        DWord: 0
+  # Section: 18.10.42.13
+  # Title: Ensure 'Trigger a quick scan after X days without any scans' is set to 'Enabled: 7'
+  - name: '18.10.42.13.4 - DaysUntilAggressiveCatchupQuickScan'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Scan'
+      valueName: 'DaysUntilAggressiveCatchupQuickScan'
+      valueData:
+        DWord: 7
+  # Section: 18.10.42.13
+  # Title: Ensure 'Turn on e-mail scanning' is set to 'Enabled'
+  - name: '18.10.42.13.5 - DisableEmailScanning'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Scan'
+      valueName: 'DisableEmailScanning'
+      valueData:
+        DWord: 0
+  # Section: 18.10.57.2
+  # Title: Ensure 'Do not allow passwords to be saved' is set to 'Enabled'
+  - name: '18.10.57.2.2 - DisablePasswordSaving'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
+      valueName: 'DisablePasswordSaving'
+      valueData:
+        DWord: 1
+  # Section: 18.10.57.3.3
+  # Title: Ensure 'Do not allow drive redirection' is set to 'Enabled'
+  - name: '18.10.57.3.3.3 - fDisableCdm'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
+      valueName: 'fDisableCdm'
+      valueData:
+        DWord: 1
+  # Section: 18.10.57.3.9
+  # Title: Ensure 'Always prompt for password upon connection' is set to 'Enabled'
+  - name: '18.10.57.3.9.1 - fPromptForPassword'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
+      valueName: 'fPromptForPassword'
+      valueData:
+        DWord: 1
+  # Section: 18.10.57.3.9
+  # Title: Ensure 'Require secure RPC communication' is set to 'Enabled'
+  - name: '18.10.57.3.9.2 - fEncryptRPCTraffic'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
+      valueName: 'fEncryptRPCTraffic'
+      valueData:
+        DWord: 1
+  # Section: 18.10.57.3.9
+  # Title: Ensure 'Require use of specific security layer for remote (RDP) connections' is set to 'Enabled: SSL'
+  - name: '18.10.57.3.9.3 - SecurityLayer'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
+      valueName: 'SecurityLayer'
+      valueData:
+        DWord: 2
+  # Section: 18.10.57.3.9
+  # Title: Ensure 'Require user authentication for remote connections by using Network Level Authentication' is set to 'Enabled'
+  - name: '18.10.57.3.9.4 - UserAuthentication'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
+      valueName: 'UserAuthentication'
+      valueData:
+        DWord: 1
+  # Section: 18.10.57.3.9
+  # Title: Ensure 'Set client connection encryption level' is set to 'Enabled: High Level'
+  - name: '18.10.57.3.9.5 - MinEncryptionLevel'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
+      valueName: 'MinEncryptionLevel'
+      valueData:
+        DWord: 3
+  # Section: 18.10.57.3.11
+  # Title: Ensure 'Do not delete temp folders upon exit' is set to 'Disabled'
+  - name: '18.10.57.3.11.1 - DeleteTempDirsOnExit'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
+      valueName: 'DeleteTempDirsOnExit'
+      valueData:
+        DWord: 1
+  # Section: 18.10.57.3.11
+  # Title: Ensure 'Do not use temporary folders per session' is set to 'Disabled'
+  - name: '18.10.57.3.11.2 - PerSessionTempDir'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
+      valueName: 'PerSessionTempDir'
+      valueData:
+        DWord: 1
+  # Section: 18.10.58
+  # Title: Ensure 'Prevent downloading of enclosures' is set to 'Enabled'
+  - name: '18.10.58.1 - DisableEnclosureDownload'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Internet Explorer\Feeds'
+      valueName: 'DisableEnclosureDownload'
+      valueData:
+        DWord: 1
+  # Section: 18.10.59
+  # Title: Ensure 'Allow indexing of encrypted files' is set to 'Disabled'
+  - name: '18.10.59.3 - AllowIndexingEncryptedStoresOrItems'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search'
+      valueName: 'AllowIndexingEncryptedStoresOrItems'
+      valueData:
+        DWord: 0
+  # Section: 18.10.77.2
+  # Title: Ensure 'Configure Windows Defender SmartScreen' is set to 'Enabled: Warn and prevent bypass'
+  - name: '18.10.77.2.1 - EnableSmartScreen'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System'
+      valueName: 'EnableSmartScreen'
+      valueData:
+        DWord: 1
+  # Section: 18.10.77.2
+  # Title: Ensure 'Configure Windows Defender SmartScreen' is set to 'Enabled: Warn and prevent bypass'
+  - name: '18.10.77.2.1 - ShellSmartScreenLevel'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System'
+      valueName: 'ShellSmartScreenLevel'
+      valueData:
+        DWord: 1
+  # Section: 18.10.81
+  # Title: Ensure 'Allow Windows Ink Workspace' is set to 'Enabled: On, but disallow access above lock' OR 'Enabled: Disabled'
+  - name: '18.10.81.2 - AllowWindowsInkWorkspace'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsInkWorkspace'
+      valueName: 'AllowWindowsInkWorkspace'
+      valueData:
+        DWord: 0
+  # Section: 18.10.82
+  # Title: Ensure 'Allow user control over installs' is set to 'Disabled'
+  - name: '18.10.82.1 - EnableUserControl'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Installer'
+      valueName: 'EnableUserControl'
+      valueData:
+        DWord: 0
+  # Section: 18.10.82
+  # Title: Ensure 'Always install with elevated privileges' is set to 'Disabled'
+  - name: '18.10.82.2 - AlwaysInstallElevated'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Installer'
+      valueName: 'AlwaysInstallElevated'
+      valueData:
+        DWord: 0
+  # Section: 18.10.83
+  # Title: Ensure 'Configure the transmission of the user's password in the content of MPR notifications sent by winlogon.' is set to 'Disabled'
+  - name: '18.10.83.1 - EnableMPR'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+      valueName: 'EnableMPR'
+      valueData:
+        DWord: 0
+  # Section: 18.10.83
+  # Title: Ensure 'Sign-in and lock last interactive user automatically after a restart' is set to 'Disabled'
+  - name: '18.10.83.2 - DisableAutomaticRestartSignOn'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+      valueName: 'DisableAutomaticRestartSignOn'
+      valueData:
+        DWord: 1
+  # Section: 18.10.90.1
+  # Title: Ensure 'Allow Basic authentication' is set to 'Disabled'
+  - name: '18.10.90.1.1 - AllowBasic'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WinRM\Client'
+      valueName: 'AllowBasic'
+      valueData:
+        DWord: 0
+  # Section: 18.10.90.1
+  # Title: Ensure 'Allow unencrypted traffic' is set to 'Disabled'
+  - name: '18.10.90.1.2 - AllowUnencryptedTraffic'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WinRM\Client'
+      valueName: 'AllowUnencryptedTraffic'
+      valueData:
+        DWord: 0
+  # Section: 18.10.90.1
+  # Title: Ensure 'Disallow Digest authentication' is set to 'Enabled'
+  - name: '18.10.90.1.3 - AllowDigest'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WinRM\Client'
+      valueName: 'AllowDigest'
+      valueData:
+        DWord: 0
+  # Section: 18.10.90.2
+  # Title: Ensure 'Allow Basic authentication' is set to 'Disabled'
+  - name: '18.10.90.2.1 - AllowBasic'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service'
+      valueName: 'AllowBasic'
+      valueData:
+        DWord: 0
+  # Section: 18.10.90.2
+  # Title: Ensure 'Allow unencrypted traffic' is set to 'Disabled'
+  - name: '18.10.90.2.3 - AllowUnencryptedTraffic'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service'
+      valueName: 'AllowUnencryptedTraffic'
+      valueData:
+        DWord: 0
+  # Section: 18.10.90.2
+  # Title: Ensure 'Disallow WinRM from storing RunAs credentials' is set to 'Enabled'
+  - name: '18.10.90.2.4 - DisableRunAs'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service'
+      valueName: 'DisableRunAs'
+      valueData:
+        DWord: 1
+  # Section: 18.10.93.2
+  # Title: Ensure 'Prevent users from modifying settings' is set to 'Enabled'
+  - name: '18.10.93.2.1 - DisallowExploitProtectionOverride'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection'
+      valueName: 'DisallowExploitProtectionOverride'
+      valueData:
+        DWord: 1
+  # Section: 18.10.94.1
+  # Title: Ensure 'No auto-restart with logged on users for scheduled automatic updates installations' is set to 'Disabled'
+  - name: '18.10.94.1.1 - NoAutoRebootWithLoggedOnUsers'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'
+      valueName: 'NoAutoRebootWithLoggedOnUsers'
+      valueData:
+        DWord: 0
+  # Section: 18.10.94.2
+  # Title: Ensure 'Configure Automatic Updates' is set to 'Enabled'
+  - name: '18.10.94.2.1 - NoAutoUpdate'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'
+      valueName: 'NoAutoUpdate'
+      valueData:
+        DWord: 0
+  # Section: 18.10.94.2
+  # Title: Ensure 'Configure Automatic Updates: Scheduled install day' is set to '0 - Every day'
+  - name: '18.10.94.2.2 - ScheduledInstallDay'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU'
+      valueName: 'ScheduledInstallDay'
+      valueData:
+        DWord: 0
+  # Section: 18.10.94.4
+  # Title: Ensure 'Manage preview builds' is set to 'Disabled'
+  - name: '18.10.94.4.1 - ManagePreviewBuildsPolicyValue'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate'
+      valueName: 'ManagePreviewBuildsPolicyValue'
+      valueData:
+        DWord: 1
+  # Section: 18.10.94.4
+  # Title: Ensure 'Select when Quality Updates are received' is set to 'Enabled: 0 days'
+  - name: '18.10.94.4.2 - DeferQualityUpdates'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate'
+      valueName: 'DeferQualityUpdates'
+      valueData:
+        DWord: 1
+  # Section: 18.10.94.4
+  # Title: Ensure 'Select when Quality Updates are received' is set to 'Enabled: 0 days'
+  - name: '18.10.94.4.2 - DeferQualityUpdatesPeriodInDays'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate'
+      valueName: 'DeferQualityUpdatesPeriodInDays'
+      valueData:
+        DWord: 1
+  # Section: 18.11
+  # Title: Ensure 'Disable HTTP proxy features: Disable WPAD' is set to 'Enabled: Checked'
+  - name: '18.11.1 - DisableWpad'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings\WinHttp'
+      valueName: 'DisableWpad'
+      valueData:
+        DWord: 1
+  # Section: 18.11
+  # Title: Ensure 'Disable HTTP proxy features: Disable proxy authentication' is set to 'Enabled: Disable authentication over loopback interfaces' or higher
+  - name: '18.11.2 - DisableProxyAuthenticationSchemes'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings'
+      valueName: 'DisableProxyAuthenticationSchemes'
+      valueData:
+        DWord: 256

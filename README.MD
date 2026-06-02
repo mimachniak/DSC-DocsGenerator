@@ -46,6 +46,13 @@ Copy the folder `module\DSC-DocsGenerator` to one of the paths in `$env:PSModule
 Import-Module DSC-DocsGenerator -Force
 ```
 
+### Option 3: Install from PowerShell Gallery
+
+```powershell
+Install-Module -Name DSC-DocsGenerator
+Import-Module DSC-DocsGenerator -Force
+```
+
 ## Quick Start
 
 From the repository root:

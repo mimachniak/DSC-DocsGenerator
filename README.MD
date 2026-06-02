@@ -153,6 +153,3 @@ Check whether `-WhatIf` was used, and verify output folder permissions.
 - Input sample configs: `dsc-config\`
 - Example generated reports: `report-example\`
 
-## License
-
-Add your preferred license text here.

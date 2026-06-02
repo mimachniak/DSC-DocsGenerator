@@ -98,16 +98,20 @@ PrivateData = @{
         Tags = 'DSC', 'Compliance', 'Markdown', 'Report', 'DSCV3', 'Documentation'
 
         # A URL to the license for this module.
-        # LicenseUri = ''
+        LicenseUri = 'https://github.com/mimachniak/DSC-DocsGenerator/blob/main/LICENSE'
 
         # A URL to the main website for this project.
-        # ProjectUri = ''
+        ProjectUri = 'https://github.com/mimachniak/DSC-DocsGenerator'
 
         # A URL to an icon representing this module.
         # IconUri = ''
 
         # ReleaseNotes of this module
-        # ReleaseNotes = ''
+        ReleaseNotes = '
+        v.1.0.0
+            - Add base function using dsc test to generate drifft document
+        
+        '
 
         # Prerelease string of this module
         # Prerelease = ''

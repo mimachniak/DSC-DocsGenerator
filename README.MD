@@ -1,6 +1,9 @@
 # DSC-DocsGenerator
 
-
+![PowerShell Gallery](https://img.shields.io/powershellgallery/v/DSC-DocsGenerator.svg)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Platform](https://img.shields.io/badge/platform-PowerShell%207%2B-lightgrey)
+![Downloads](https://img.shields.io/powershellgallery/dt/DSC-DocsGenerator)
 
 Generate Markdown compliance reports from DSC v3 configuration test results.
 

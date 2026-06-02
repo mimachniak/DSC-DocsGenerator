@@ -1,6 +1,10 @@
 # DSC-DocsGenerator
 
+
+
 Generate Markdown compliance reports from DSC v3 configuration test results.
+
+![DSC document](./dsc-document.png)
 
 This module runs `dsc config test` for a YAML configuration file, parses the output, and creates a report that includes:
 

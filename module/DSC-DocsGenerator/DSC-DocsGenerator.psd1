@@ -104,12 +104,12 @@ PrivateData = @{
         ProjectUri = 'https://github.com/mimachniak/DSC-DocsGenerator'
 
         # A URL to an icon representing this module.
-        # IconUri = ''
+        IconUri = 'https://github.com/mimachniak/DSC-DocsGenerator/blob/main/dsc-document.png'
 
         # ReleaseNotes of this module
         ReleaseNotes = '
         v.1.0.0
-            - Add base function using dsc test to generate drifft document
+            - Add base function using dsc test to generate drifft document and export it to markdown file.
         
         '
 

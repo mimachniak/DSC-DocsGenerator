@@ -57,6 +57,8 @@ Import-Module DSC-DocsGenerator -Force
 
 From the repository root:
 
+To install DSC v3, see [Microsoft Desired State Configuration overview - PowerShell | Microsoft Learn](https://learn.microsoft.com/en-us/powershell/dsc/overview?view=dsc-3.0).
+
 ```powershell
 Import-Module .\module\DSC-DocsGenerator\DSC-DocsGenerator.psd1 -Force
 
@@ -166,4 +168,9 @@ Check whether `-WhatIf` was used, and verify output folder permissions.
 
 - Input sample configs: `dsc-config\`
 - Example generated reports: `report-example\`
+
+## References
+
+- [PowerShell DSC](https://github.com/PowerShell/DSC)
+- [dsccommunity.org](https://dsccommunity.org/)
 

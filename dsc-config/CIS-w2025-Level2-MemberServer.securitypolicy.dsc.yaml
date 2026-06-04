@@ -1,0 +1,509 @@
+$schema: https://aka.ms/dsc/schemas/v3/bundled/config/document.json
+
+metadata:
+  Microsoft.DSC:
+    requiredSecurityContext: elevated
+
+parameters:
+  renameAdministratorAccount:
+    type: string
+    defaultValue: LocalAdminRenamed
+  renameGuestAccount:
+    type: string
+    defaultValue: LocalGuestRenamed
+  interactiveLogonMessageTitle:
+    type: string
+    defaultValue: Authorized Use Only
+  interactiveLogonMessageText:
+    type: string
+    defaultValue: This system is for authorized use only.
+
+# CIS Microsoft Windows Server 2025 Benchmark v2.0.0 - Level 2 (Member Server)
+# Complete security-policy hardening for an L2 server: Level 1 baseline
+# (Account Policy, User Rights Assignment, Security Options) plus the
+# additional Security Options introduced at Level 2 (2.3.7.1, 2.3.7.6, 2.3.10.4).
+# All other L2 hardening items (Administrative Templates, services) are
+# registry-based and live in CIS-w2025-Level2-MemberServer.registry.dsc.yaml.
+
+resources:
+- name: CIS Level 2 Member Server - SecurityPolicyDsc
+  type: Microsoft.Windows/WindowsPowerShell
+  properties:
+    resources:
+      # Section: 1.1 and 1.2
+      # Title: Account Policies (Password Policy and Account Lockout Policy)
+      - name: CIS Account Policy
+        type: SecurityPolicyDsc/AccountPolicy
+        properties:
+          Name: CISAccountPolicy
+          Enforce_password_history: 24
+          Maximum_Password_Age: 365
+          Minimum_Password_Age: 1
+          Minimum_Password_Length: 14
+          Password_must_meet_complexity_requirements: Enabled
+          Store_passwords_using_reversible_encryption: Disabled
+          Account_lockout_duration: 15
+          Account_lockout_threshold: 5
+          Reset_account_lockout_counter_after: 15
+
+      # User Rights Assignment (CIS 2.2.x)
+      # Section: 2.2.1
+      # Title: Access Credential Manager as a trusted caller
+      - name: 2.2.1 Access Credential Manager as a trusted caller
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Access_Credential_Manager_as_a_trusted_caller
+          Identity:
+            - "[concat('', '')]"
+          Force: true
+
+      # Section: 2.2.3
+      # Title: Access this computer from the network
+      - name: 2.2.3 Access this computer from the network
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Access_this_computer_from_the_network
+          Identity:
+            - Builtin\Administrators
+            - Authenticated Users
+          Force: true
+
+      # Section: 2.2.4
+      # Title: Act as part of the operating system
+      - name: 2.2.4 Act as part of the operating system
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Act_as_part_of_the_operating_system
+          Identity:
+            - "[concat('', '')]"
+          Force: true
+
+      # Section: 2.2.6
+      # Title: Adjust memory quotas for a process
+      - name: 2.2.6 Adjust memory quotas for a process
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Adjust_memory_quotas_for_a_process
+          Identity:
+            - Builtin\Administrators
+            - LOCAL SERVICE
+            - NETWORK SERVICE
+          Force: true
+
+      # Section: 2.2.8
+      # Title: Allow log on locally
+      - name: 2.2.8 Allow log on locally
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Allow_log_on_locally
+          Identity:
+            - Builtin\Administrators
+          Force: true
+
+      # Section: 2.2.10
+      # Title: Allow log on through Remote Desktop Services
+      - name: 2.2.10 Allow log on through Remote Desktop Services
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Allow_log_on_through_Remote_Desktop_Services
+          Identity:
+            - Builtin\Administrators
+            - Remote Desktop Users
+          Force: true
+
+      # Section: 2.2.11
+      # Title: Back up files and directories
+      - name: 2.2.11 Back up files and directories
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Back_up_files_and_directories
+          Identity:
+            - Builtin\Administrators
+          Force: true
+
+      # Section: 2.2.12
+      # Title: Change the system time
+      - name: 2.2.12 Change the system time
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Change_the_system_time
+          Identity:
+            - Builtin\Administrators
+            - LOCAL SERVICE
+          Force: true
+
+      # Section: 2.2.13
+      # Title: Create a pagefile
+      - name: 2.2.13 Create a pagefile
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Create_a_pagefile
+          Identity:
+            - Builtin\Administrators
+          Force: true
+
+      # Section: 2.2.14
+      # Title: Create a token object
+      - name: 2.2.14 Create a token object
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Create_a_token_object
+          Identity:
+            - "[concat('', '')]"
+          Force: true
+
+      # Section: 2.2.15
+      # Title: Create global objects
+      - name: 2.2.15 Create global objects
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Create_global_objects
+          Identity:
+            - Builtin\Administrators
+            - LOCAL SERVICE
+            - NETWORK SERVICE
+            - SERVICE
+          Force: true
+
+      # Section: 2.2.16
+      # Title: Create permanent shared objects
+      - name: 2.2.16 Create permanent shared objects
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Create_permanent_shared_objects
+          Identity:
+            - "[concat('', '')]"
+          Force: true
+
+      # Section: 2.2.18
+      # Title: Create symbolic links
+      - name: 2.2.18 Create symbolic links
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Create_symbolic_links
+          Identity:
+            - Builtin\Administrators
+            - NT VIRTUAL MACHINE\Virtual Machines
+          Force: true
+
+      # Section: 2.2.19
+      # Title: Debug programs
+      - name: 2.2.19 Debug programs
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Debug_programs
+          Identity:
+            - Builtin\Administrators
+          Force: true
+
+      # Section: 2.2.21
+      # Title: Deny access to this computer from the network
+      - name: 2.2.21 Deny access to this computer from the network
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Deny_access_to_this_computer_from_the_network
+          Identity:
+            - Guests
+            - '[[Local Account|Administrator]'
+          Force: true
+
+      # Section: 2.2.22
+      # Title: Deny log on as a batch job
+      - name: 2.2.22 Deny log on as a batch job
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Deny_log_on_as_a_batch_job
+          Identity:
+            - Guests
+          Force: true
+
+      # Section: 2.2.23
+      # Title: Deny log on as a service
+      - name: 2.2.23 Deny log on as a service
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Deny_log_on_as_a_service
+          Identity:
+            - Guests
+          Force: true
+
+      # Section: 2.2.24
+      # Title: Deny log on locally
+      - name: 2.2.24 Deny log on locally
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Deny_log_on_locally
+          Identity:
+            - Guests
+          Force: true
+
+      # Section: 2.2.26
+      # Title: Deny log on through Remote Desktop Services
+      - name: 2.2.26 Deny log on through Remote Desktop Services
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Deny_log_on_through_Remote_Desktop_Services
+          Identity:
+            - Guests
+            - '[[Local Account]'
+          Force: true
+
+      # Section: 2.2.28
+      # Title: Enable computer and user accounts to be trusted for delegation
+      - name: 2.2.28 Enable computer and user accounts to be trusted for delegation
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Enable_computer_and_user_accounts_to_be_trusted_for_delegation
+          Identity:
+            - "[concat('', '')]"
+          Force: true
+
+      # Section: 2.2.29
+      # Title: Force shutdown from a remote system
+      - name: 2.2.29 Force shutdown from a remote system
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Force_shutdown_from_a_remote_system
+          Identity:
+            - Builtin\Administrators
+          Force: true
+
+      # Section: 2.2.30
+      # Title: Generate security audits
+      - name: 2.2.30 Generate security audits
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Generate_security_audits
+          Identity:
+            - LOCAL SERVICE
+            - NETWORK SERVICE
+            - RESTRICTED SERVICES\PrintSpoolerService
+          Force: true
+
+      # Section: 2.2.32
+      # Title: Impersonate a client after authentication
+      - name: 2.2.32 Impersonate a client after authentication
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Impersonate_a_client_after_authentication
+          Identity:
+            - Builtin\Administrators
+            - LOCAL SERVICE
+            - NETWORK SERVICE
+            - SERVICE
+            - RESTRICTED SERVICES\PrintSpoolerService
+          Force: true
+
+      # Section: 2.2.33
+      # Title: Increase scheduling priority
+      - name: 2.2.33 Increase scheduling priority
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Increase_scheduling_priority
+          Identity:
+            - Builtin\Administrators
+            - Window Manager\Window Manager Group
+          Force: true
+
+      # Section: 2.2.34
+      # Title: Load and unload device drivers
+      - name: 2.2.34 Load and unload device drivers
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Load_and_unload_device_drivers
+          Identity:
+            - Builtin\Administrators
+          Force: true
+
+      # Section: 2.2.35
+      # Title: Lock pages in memory
+      - name: 2.2.35 Lock pages in memory
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Lock_pages_in_memory
+          Identity:
+            - "[concat('', '')]"
+          Force: true
+
+      # Section: 2.2.38
+      # Title: Manage auditing and security log
+      - name: 2.2.38 Manage auditing and security log
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Manage_auditing_and_security_log
+          Identity:
+            - Builtin\Administrators
+          Force: true
+
+      # Section: 2.2.39
+      # Title: Modify an object label
+      - name: 2.2.39 Modify an object label
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Modify_an_object_label
+          Identity:
+            - "[concat('', '')]"
+          Force: true
+
+      # Section: 2.2.40
+      # Title: Modify firmware environment values
+      - name: 2.2.40 Modify firmware environment values
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Modify_firmware_environment_values
+          Identity:
+            - Builtin\Administrators
+          Force: true
+
+      # Section: 2.2.41
+      # Title: Perform volume maintenance tasks
+      - name: 2.2.41 Perform volume maintenance tasks
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Perform_volume_maintenance_tasks
+          Identity:
+            - Builtin\Administrators
+          Force: true
+
+      # Section: 2.2.42
+      # Title: Profile single process
+      - name: 2.2.42 Profile single process
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Profile_single_process
+          Identity:
+            - Builtin\Administrators
+          Force: true
+
+      # Section: 2.2.43
+      # Title: Profile system performance
+      - name: 2.2.43 Profile system performance
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Profile_system_performance
+          Identity:
+            - Builtin\Administrators
+            - NT SERVICE\WdiServiceHost
+          Force: true
+
+      # Section: 2.2.44
+      # Title: Replace a process level token
+      - name: 2.2.44 Replace a process level token
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Replace_a_process_level_token
+          Identity:
+            - LOCAL SERVICE
+            - NETWORK SERVICE
+          Force: true
+
+      # Section: 2.2.45
+      # Title: Restore files and directories
+      - name: 2.2.45 Restore files and directories
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Restore_files_and_directories
+          Identity:
+            - Builtin\Administrators
+          Force: true
+
+      # Section: 2.2.46
+      # Title: Shut down the system
+      - name: 2.2.46 Shut down the system
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Shut_down_the_system
+          Identity:
+            - Builtin\Administrators
+          Force: true
+
+      # Section: 2.2.48
+      # Title: Take ownership of files or other objects
+      - name: 2.2.48 Take ownership of files or other objects
+        type: SecurityPolicyDsc/UserRightsAssignment
+        properties:
+          Policy: Take_ownership_of_files_or_other_objects
+          Identity:
+            - Builtin\Administrators
+          Force: true
+
+      # Security Options (CIS 2.3.x subset supported by SecurityPolicyDsc/SecurityOption)
+      # Section: 2.3
+      # Title: Security Options
+      - name: CIS L2 Security Options
+        type: SecurityPolicyDsc/SecurityOption
+        properties:
+          Name: CISLevel2SecurityOptions
+          Accounts_Guest_account_status: Disabled
+          Accounts_Limit_local_account_use_of_blank_passwords_to_console_logon_only: Enabled
+          Accounts_Rename_administrator_account: "[parameters('renameAdministratorAccount')]"
+          Accounts_Rename_guest_account: "[parameters('renameGuestAccount')]"
+          Audit_Force_audit_policy_subcategory_settings_Windows_Vista_or_later_to_override_audit_policy_category_settings: Enabled
+          Audit_Shut_down_system_immediately_if_unable_to_log_security_audits: Disabled
+          Devices_Prevent_users_from_installing_printer_drivers: Enabled
+          Domain_member_Digitally_encrypt_or_sign_secure_channel_data_always: Enabled
+          Domain_member_Digitally_encrypt_secure_channel_data_when_possible: Enabled
+          Domain_member_Digitally_sign_secure_channel_data_when_possible: Enabled
+          Domain_member_Disable_machine_account_password_changes: Disabled
+          Domain_member_Maximum_machine_account_password_age: '30'
+          Domain_member_Require_strong_Windows_2000_or_later_session_key: Enabled
+          Interactive_logon_Do_not_display_last_user_name: Enabled
+          Interactive_logon_Machine_inactivity_limit: '900'
+          Interactive_logon_Message_text_for_users_attempting_to_log_on: "[parameters('interactiveLogonMessageText')]"
+          Interactive_logon_Message_title_for_users_attempting_to_log_on: "[parameters('interactiveLogonMessageTitle')]"
+          Interactive_logon_Prompt_user_to_change_password_before_expiration: '14'
+          Interactive_logon_Require_Domain_Controller_authentication_to_unlock_workstation: Enabled
+          Interactive_logon_Smart_card_removal_behavior: Lock workstation
+          Microsoft_network_client_Digitally_sign_communications_always: Enabled
+          # --- CIS Level 2 additions ---
+          # Section: 2.3.7.1
+          # Title: Ensure 'Interactive logon: Do not require CTRL+ALT+DEL' is set to 'Disabled'
+          Interactive_logon_Do_not_require_CTRL_ALT_DEL: Disabled
+          # Section: 2.3.7.6
+          # Title: Ensure 'Interactive logon: Number of previous logons to cache
+          #        (in case domain controller is not available)' is set to '4 or fewer logon(s)' (MS only)
+          Interactive_logon_Number_of_previous_logons_to_cache_in_case_domain_controller_is_not_available: '4'
+          # Section: 2.3.10.4
+          # Title: Ensure 'Network access: Do not allow storage of passwords and credentials
+          #        for network authentication' is set to 'Enabled'
+          Network_access_Do_not_allow_storage_of_passwords_and_credentials_for_network_authentication: Enabled
+          Microsoft_network_client_Send_unencrypted_password_to_third_party_SMB_servers: Disabled
+          Microsoft_network_server_Amount_of_idle_time_required_before_suspending_session: '15'
+          Microsoft_network_server_Digitally_sign_communications_always: Enabled
+          Microsoft_network_server_Disconnect_clients_when_logon_hours_expire: Enabled
+          Microsoft_network_server_Server_SPN_target_name_validation_level: Accept if provided by client
+          Network_access_Allow_anonymous_SID_Name_translation: Disabled
+          Network_access_Do_not_allow_anonymous_enumeration_of_SAM_accounts: Enabled
+          Network_access_Do_not_allow_anonymous_enumeration_of_SAM_accounts_and_shares: Enabled
+          Network_access_Let_Everyone_permissions_apply_to_anonymous_users: Disabled
+          Network_access_Named_Pipes_that_can_be_accessed_anonymously: "[concat('', '')]"
+          Network_access_Remotely_accessible_registry_paths: System\CurrentControlSet\Control\ProductOptions,System\CurrentControlSet\Control\Server Applications,Software\Microsoft\Windows NT\CurrentVersion
+          Network_access_Remotely_accessible_registry_paths_and_subpaths: System\CurrentControlSet\Control\Print\Printers,System\CurrentControlSet\Services\Eventlog,Software\Microsoft\OLAP Server,Software\Microsoft\Windows NT\CurrentVersion\Print,Software\Microsoft\Windows NT\CurrentVersion\Windows,System\CurrentControlSet\Control\ContentIndex,System\CurrentControlSet\Control\Terminal Server,System\CurrentControlSet\Control\Terminal Server\UserConfig,System\CurrentControlSet\Control\Terminal Server\DefaultUserConfiguration,Software\Microsoft\Windows NT\CurrentVersion\Perflib,System\CurrentControlSet\Services\SysmonLog,System\CurrentControlSet\Services\CertSvc,System\CurrentControlSet\Services\WINS
+          Network_access_Restrict_anonymous_access_to_Named_Pipes_and_Shares: Enabled
+          Network_access_Shares_that_can_be_accessed_anonymously: "[concat('', '')]"
+          Network_access_Sharing_and_security_model_for_local_accounts: Classic - Local users authenticate as themselves
+          Network_security_Allow_Local_System_to_use_computer_identity_for_NTLM: Enabled
+          Network_security_Allow_LocalSystem_NULL_session_fallback: Disabled
+          Network_Security_Allow_PKU2U_authentication_requests_to_this_computer_to_use_online_identities: Disabled
+          Network_security_Configure_encryption_types_allowed_for_Kerberos:
+            - AES128_HMAC_SHA1
+            - AES256_HMAC_SHA1
+            - FUTURE
+          Network_security_Force_logoff_when_logon_hours_expire: Enabled
+          Network_security_LAN_Manager_authentication_level: Send NTLMv2 responses only. Refuse LM & NTLM
+          Network_security_LDAP_client_signing_requirements: Negotiate Signing
+          Network_security_Minimum_session_security_for_NTLM_SSP_based_including_secure_RPC_clients: Both options checked
+          Network_security_Minimum_session_security_for_NTLM_SSP_based_including_secure_RPC_servers: Both options checked
+          Network_Security_Restrict_NTLM_Audit_Incoming_NTLM_Traffic: Enable auditing for all accounts
+          Network_Security_Restrict_NTLM_Outgoing_NTLM_traffic_to_remote_servers: Audit all
+          Shutdown_Allow_system_to_be_shut_down_without_having_to_log_on: Disabled
+          System_objects_Require_case_insensitivity_for_non_Windows_subsystems: Enabled
+          System_objects_Strengthen_default_permissions_of_internal_system_objects_eg_Symbolic_Links: Enabled
+          User_Account_Control_Admin_Approval_Mode_for_the_Built_in_Administrator_account: Enabled
+          User_Account_Control_Behavior_of_the_elevation_prompt_for_administrators_in_Admin_Approval_Mode: Prompt for consent on the secure desktop
+          User_Account_Control_Behavior_of_the_elevation_prompt_for_standard_users: Automatically deny elevation request
+          User_Account_Control_Detect_application_installations_and_prompt_for_elevation: Enabled
+          User_Account_Control_Only_elevate_UIAccess_applications_that_are_installed_in_secure_locations: Enabled
+          User_Account_Control_Run_all_administrators_in_Admin_Approval_Mode: Enabled
+          User_Account_Control_Switch_to_the_secure_desktop_when_prompting_for_elevation: Enabled
+          User_Account_Control_Virtualize_file_and_registry_write_failures_to_per_user_locations: Enabled

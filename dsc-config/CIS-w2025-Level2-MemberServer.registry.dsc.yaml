@@ -1,0 +1,928 @@
+$schema: https://aka.ms/dsc/schemas/v3/bundled/config/document.json
+resources:
+  # Section: 2.3.7
+  # Title: Ensure 'Interactive logon: Do not require CTRL+ALT+DEL' is set to 'Disabled'
+  - name: '2.3.7.1 - DisableCAD'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
+      valueName: 'DisableCAD'
+      valueData:
+        DWord: 0
+  # Section: 2.3.7
+  # Title: Ensure 'Interactive logon: Number of previous logons to cache (in case domain controller is not available)' is set to '4 or fewer logon(s)' (MS only)
+  - name: '2.3.7.6 - CachedLogonsCount'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon'
+      valueName: 'CachedLogonsCount'
+  # Section: 2.3.10
+  # Title: Ensure 'Network access: Do not allow storage of passwords and credentials for network authentication' is set to 'Enabled'
+  - name: '2.3.10.4 - DisableDomainCreds'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa'
+      valueName: 'DisableDomainCreds'
+      valueData:
+        DWord: 1
+  # Section: 5
+  # Title: Ensure 'Print Spooler (Spooler)' is set to 'Disabled' (MS only)
+  - name: '5.2 - Start'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Spooler'
+      valueName: 'Start'
+      valueData:
+        DWord: 4
+  # Section: 18.1
+  # Title: Ensure 'Allow Online Tips' is set to 'Disabled'
+  - name: '18.1.3 - AllowOnlineTips'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer'
+      valueName: 'AllowOnlineTips'
+      valueData:
+        DWord: 0
+  # Section: 18.5
+  # Title: Ensure 'MSS: (KeepAliveTime) How often keep-alive packets are sent in milliseconds' is set to 'Enabled: 300,000 or 5 minutes'
+  - name: '18.5.5 - KeepAliveTime'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters'
+      valueName: 'KeepAliveTime'
+      valueData:
+        DWord: 300000
+  # Section: 18.5
+  # Title: Ensure 'MSS: (PerformRouterDiscovery) Allow IRDP to detect and configure Default Gateway addresses' is set to 'Disabled'
+  - name: '18.5.7 - PerformRouterDiscovery'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters'
+      valueName: 'PerformRouterDiscovery'
+      valueData:
+        DWord: 0
+  # Section: 18.5
+  # Title: Ensure 'MSS: (TcpMaxDataRetransmissions IPv6) How many times unacknowledged data is retransmitted' is set to 'Enabled: 3'
+  - name: '18.5.9 - TcpMaxDataRetransmissions'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TCPIP6\Parameters'
+      valueName: 'TcpMaxDataRetransmissions'
+      valueData:
+        DWord: 3
+  # Section: 18.5
+  # Title: Ensure 'MSS: (TcpMaxDataRetransmissions) How many times unacknowledged data is retransmitted' is set to 'Enabled: 3'
+  - name: '18.5.10 - TcpMaxDataRetransmissions'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters'
+      valueName: 'TcpMaxDataRetransmissions'
+      valueData:
+        DWord: 3
+  # Section: 18.6.4
+  # Title: Ensure 'Turn off default IPv6 DNS Servers' is set to 'Enabled'
+  - name: '18.6.4.3 - DisableIPv6DefaultDnsServers'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient'
+      valueName: 'DisableIPv6DefaultDnsServers'
+      valueData:
+        DWord: 1
+  # Section: 18.6.5
+  # Title: Ensure 'Enable Font Providers' is set to 'Disabled'
+  - name: '18.6.5.1 - EnableFontProviders'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System'
+      valueName: 'EnableFontProviders'
+      valueData:
+        DWord: 0
+  # Section: 18.6.9
+  # Title: Ensure 'Turn on Mapper I/O (LLTDIO) driver' is set to 'Disabled'
+  - name: '18.6.9.1 - AllowLLTDIOOnDomain'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LLTD'
+      valueName: 'AllowLLTDIOOnDomain'
+      valueData:
+        DWord: 0
+  # Section: 18.6.9
+  # Title: Ensure 'Turn on Mapper I/O (LLTDIO) driver' is set to 'Disabled'
+  - name: '18.6.9.1 - AllowLLTDIOOnPublicNet'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LLTD'
+      valueName: 'AllowLLTDIOOnPublicNet'
+      valueData:
+        DWord: 0
+  # Section: 18.6.9
+  # Title: Ensure 'Turn on Mapper I/O (LLTDIO) driver' is set to 'Disabled'
+  - name: '18.6.9.1 - EnableLLTDIO'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LLTD'
+      valueName: 'EnableLLTDIO'
+      valueData:
+        DWord: 0
+  # Section: 18.6.9
+  # Title: Ensure 'Turn on Mapper I/O (LLTDIO) driver' is set to 'Disabled'
+  - name: '18.6.9.1 - ProhibitLLTDIOOnPrivateNet'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LLTD'
+      valueName: 'ProhibitLLTDIOOnPrivateNet'
+      valueData:
+        DWord: 0
+  # Section: 18.6.9
+  # Title: Ensure 'Turn on Responder (RSPNDR) driver' is set to 'Disabled'
+  - name: '18.6.9.2 - AllowRspndrOnDomain'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LLTD'
+      valueName: 'AllowRspndrOnDomain'
+      valueData:
+        DWord: 0
+  # Section: 18.6.9
+  # Title: Ensure 'Turn on Responder (RSPNDR) driver' is set to 'Disabled'
+  - name: '18.6.9.2 - AllowRspndrOnPublicNet'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LLTD'
+      valueName: 'AllowRspndrOnPublicNet'
+      valueData:
+        DWord: 0
+  # Section: 18.6.9
+  # Title: Ensure 'Turn on Responder (RSPNDR) driver' is set to 'Disabled'
+  - name: '18.6.9.2 - EnableRspndr'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LLTD'
+      valueName: 'EnableRspndr'
+      valueData:
+        DWord: 0
+  # Section: 18.6.9
+  # Title: Ensure 'Turn on Responder (RSPNDR) driver' is set to 'Disabled'
+  - name: '18.6.9.2 - ProhibitRspndrOnPrivateNet'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LLTD'
+      valueName: 'ProhibitRspndrOnPrivateNet'
+      valueData:
+        DWord: 0
+  # Section: 18.6.10
+  # Title: Ensure 'Turn off Microsoft Peer-to-Peer Networking Services' is set to 'Enabled'
+  - name: '18.6.10.2 - Disabled'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Peernet'
+      valueName: 'Disabled'
+      valueData:
+        DWord: 1
+  # Section: 18.6.19.2
+  # Title: Disable IPv6 (Ensure TCPIP6 Parameter 'DisabledComponents' is set to '0xff (255)')
+  - name: '18.6.19.2.1 - DisabledComponents'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TCPIP6\Parameters'
+      valueName: 'DisabledComponents'
+      valueData:
+        DWord: 255
+  # Section: 18.6.20
+  # Title: Ensure 'Configuration of wireless settings using Windows Connect Now' is set to 'Disabled'
+  - name: '18.6.20.1 - EnableRegistrars'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WCN\Registrars'
+      valueName: 'EnableRegistrars'
+      valueData:
+        DWord: 0
+  # Section: 18.6.20
+  # Title: Ensure 'Configuration of wireless settings using Windows Connect Now' is set to 'Disabled'
+  - name: '18.6.20.1 - DisableUPnPRegistrar'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WCN\Registrars'
+      valueName: 'DisableUPnPRegistrar'
+      valueData:
+        DWord: 0
+  # Section: 18.6.20
+  # Title: Ensure 'Configuration of wireless settings using Windows Connect Now' is set to 'Disabled'
+  - name: '18.6.20.1 - DisableInBand802DOT11Registrar'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WCN\Registrars'
+      valueName: 'DisableInBand802DOT11Registrar'
+      valueData:
+        DWord: 0
+  # Section: 18.6.20
+  # Title: Ensure 'Configuration of wireless settings using Windows Connect Now' is set to 'Disabled'
+  - name: '18.6.20.1 - DisableFlashConfigRegistrar'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WCN\Registrars'
+      valueName: 'DisableFlashConfigRegistrar'
+      valueData:
+        DWord: 0
+  # Section: 18.6.20
+  # Title: Ensure 'Configuration of wireless settings using Windows Connect Now' is set to 'Disabled'
+  - name: '18.6.20.1 - DisableWPDRegistrar'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WCN\Registrars'
+      valueName: 'DisableWPDRegistrar'
+      valueData:
+        DWord: 0
+  # Section: 18.6.20
+  # Title: Ensure 'Prohibit access of the Windows Connect Now wizards' is set to 'Enabled'
+  - name: '18.6.20.2 - DisableWcnUi'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WCN\UI'
+      valueName: 'DisableWcnUi'
+      valueData:
+        DWord: 1
+  # Section: 18.6.21
+  # Title: Ensure 'Prohibit connection to non-domain networks when connected to domain authenticated network' is set to 'Enabled' (MS only)
+  - name: '18.6.21.2 - fBlockNonDomain'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy'
+      valueName: 'fBlockNonDomain'
+      valueData:
+        DWord: 1
+  # Section: 18.7
+  # Title: Ensure 'Configure Windows protected print' is set to 'Enabled'
+  - name: '18.7.9 - WindowsProtectedPrintGroupPolicyState'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Printers\WPP'
+      valueName: 'WindowsProtectedPrintGroupPolicyState'
+      valueData:
+        DWord: 1
+  # Section: 18.7
+  # Title: Ensure 'Require IPPS for IPP printers' is set to 'Enabled'
+  - name: '18.7.14 - RequireIpps'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Printers\IPP'
+      valueName: 'RequireIpps'
+      valueData:
+        DWord: 1
+  # Section: 18.7
+  # Title: Ensure 'Set TLS/SSL security policy for IPP printers: Disallow invalid certificate authority' is set to 'Enabled: Checked'
+  - name: '18.7.15 - SecurityFlagsBlockUnknownCA'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Printers\IPP'
+      valueName: 'SecurityFlagsBlockUnknownCA'
+      valueData:
+        DWord: 1
+  # Section: 18.7
+  # Title: Ensure 'Set TLS/SSL security policy for IPP printers: Disallow non-server certificates' is set to 'Enabled: Checked'
+  - name: '18.7.16 - SecurityFlagsBlockCertWrongUsage'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Printers\IPP'
+      valueName: 'SecurityFlagsBlockCertWrongUsage'
+      valueData:
+        DWord: 1
+  # Section: 18.7
+  # Title: Ensure 'Set TLS/SSL security policy for IPP printers: Disallow invalid certificate common name' is set to 'Enabled: Checked'
+  - name: '18.7.17 - SecurityFlagsBlockCertCNInvalid'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Printers\IPP'
+      valueName: 'SecurityFlagsBlockCertCNInvalid'
+      valueData:
+        DWord: 1
+  # Section: 18.7
+  # Title: Ensure 'Set TLS/SSL security policy for IPP printers: Disallow invalid certificate date' is set to 'Enabled: Checked'
+  - name: '18.7.18 - SecurityFlagsBlockCertDateInvalid'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Printers\IPP'
+      valueName: 'SecurityFlagsBlockCertDateInvalid'
+      valueData:
+        DWord: 1
+  # Section: 18.8.1
+  # Title: Ensure 'Turn off notifications network usage' is set to 'Enabled'
+  - name: '18.8.1.1 - NoCloudApplicationNotification'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications'
+      valueName: 'NoCloudApplicationNotification'
+      valueData:
+        DWord: 1
+  # Section: 18.9.20.1
+  # Title: Ensure 'Turn off handwriting personalization data sharing' is set to 'Enabled'
+  - name: '18.9.20.1.2 - PreventHandwritingDataSharing'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\TabletPC'
+      valueName: 'PreventHandwritingDataSharing'
+      valueData:
+        DWord: 1
+  # Section: 18.9.20.1
+  # Title: Ensure 'Turn off handwriting recognition error reporting' is set to 'Enabled'
+  - name: '18.9.20.1.3 - PreventHandwritingErrorReports'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\HandwritingErrorReports'
+      valueName: 'PreventHandwritingErrorReports'
+      valueData:
+        DWord: 1
+  # Section: 18.9.20.1
+  # Title: Ensure 'Turn off Internet Connection Wizard if URL connection is referring to Microsoft.com' is set to 'Enabled'
+  - name: '18.9.20.1.4 - ExitOnMSICW'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Internet Connection Wizard'
+      valueName: 'ExitOnMSICW'
+      valueData:
+        DWord: 1
+  # Section: 18.9.20.1
+  # Title: Ensure 'Turn off printing over HTTP' is set to 'Enabled'
+  - name: '18.9.20.1.6 - DisableHTTPPrinting'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Printers'
+      valueName: 'DisableHTTPPrinting'
+      valueData:
+        DWord: 1
+  # Section: 18.9.20.1
+  # Title: Ensure 'Turn off Registration if URL connection is referring to Microsoft.com' is set to 'Enabled'
+  - name: '18.9.20.1.7 - NoRegistration'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Registration Wizard Control'
+      valueName: 'NoRegistration'
+      valueData:
+        DWord: 1
+  # Section: 18.9.20.1
+  # Title: Ensure 'Turn off Search Companion content file updates' is set to 'Enabled'
+  - name: '18.9.20.1.8 - DisableContentFileUpdates'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\SearchCompanion'
+      valueName: 'DisableContentFileUpdates'
+      valueData:
+        DWord: 1
+  # Section: 18.9.20.1
+  # Title: Ensure 'Turn off the "Order Prints" picture task' is set to 'Enabled'
+  - name: '18.9.20.1.9 - NoOnlinePrintsWizard'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer'
+      valueName: 'NoOnlinePrintsWizard'
+      valueData:
+        DWord: 1
+  # Section: 18.9.20.1
+  # Title: Ensure 'Turn off the "Publish to Web" task for files and folders' is set to 'Enabled'
+  - name: '18.9.20.1.10 - NoPublishingWizard'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer'
+      valueName: 'NoPublishingWizard'
+      valueData:
+        DWord: 1
+  # Section: 18.9.20.1
+  # Title: Ensure 'Turn off the Windows Messenger Customer Experience Improvement Program' is set to 'Enabled'
+  - name: '18.9.20.1.11 - CEIP'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Messenger\Client'
+      valueName: 'CEIP'
+      valueData:
+        DWord: 2
+  # Section: 18.9.20.1
+  # Title: Ensure 'Turn off Windows Customer Experience Improvement Program' is set to 'Enabled'
+  - name: '18.9.20.1.12 - CEIPEnable'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\SQMClient\Windows'
+      valueName: 'CEIPEnable'
+      valueData:
+        DWord: 0
+  # Section: 18.9.20.1
+  # Title: Ensure 'Turn off Windows Error Reporting' is set to 'Enabled'
+  - name: '18.9.20.1.13 - Disabled'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting'
+      valueName: 'Disabled'
+      valueData:
+        DWord: 0
+  # Section: 18.9.20.1
+  # Title: Ensure 'Turn off Windows Error Reporting' is set to 'Enabled'
+  - name: '18.9.20.1.13 - DoReport'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\PCHealth\ErrorReporting'
+      valueName: 'DoReport'
+      valueData:
+        DWord: 0
+  # Section: 18.9.23
+  # Title: Ensure 'Support device authentication using certificate' is set to 'Enabled: Automatic'
+  - name: '18.9.23.1 - DevicePKInitBehavior'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\kerberos\parameters'
+      valueName: 'DevicePKInitBehavior'
+      valueData:
+        DWord: 0
+  # Section: 18.9.23
+  # Title: Ensure 'Support device authentication using certificate' is set to 'Enabled: Automatic'
+  - name: '18.9.23.1 - DevicePKInitEnabled'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\kerberos\parameters'
+      valueName: 'DevicePKInitEnabled'
+      valueData:
+        DWord: 0
+  # Section: 18.9.28
+  # Title: Ensure 'Disallow copying of user input methods to the system account for sign-in' is set to 'Enabled'
+  - name: '18.9.28.1 - BlockUserInputMethodsForSignIn'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Control Panel\International'
+      valueName: 'BlockUserInputMethodsForSignIn'
+      valueData:
+        DWord: 1
+  # Section: 18.9.33
+  # Title: Ensure 'Allow Clipboard synchronization across devices' is set to 'Disabled'
+  - name: '18.9.33.1 - AllowCrossDeviceClipboard'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System'
+      valueName: 'AllowCrossDeviceClipboard'
+      valueData:
+        DWord: 0
+  # Section: 18.9.33
+  # Title: Ensure 'Allow upload of User Activities' is set to 'Disabled'
+  - name: '18.9.33.2 - UploadUserActivities'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System'
+      valueName: 'UploadUserActivities'
+      valueData:
+        DWord: 0
+  # Section: 18.9.35.6
+  # Title: Ensure 'Allow network connectivity during connected-standby (on battery)' is set to 'Disabled'
+  - name: '18.9.35.6.1 - DCSettingIndex'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f15576e8-98b7-4186-b944-eafa664402d9'
+      valueName: 'DCSettingIndex'
+      valueData:
+        DWord: 0
+  # Section: 18.9.35.6
+  # Title: Ensure 'Allow network connectivity during connected-standby (plugged in)' is set to 'Disabled'
+  - name: '18.9.35.6.2 - ACSettingIndex'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f15576e8-98b7-4186-b944-eafa664402d9'
+      valueName: 'ACSettingIndex'
+      valueData:
+        DWord: 0
+  # Section: 18.9.38
+  # Title: Ensure 'Restrict Unauthenticated RPC clients' is set to 'Enabled: Authenticated' (MS only)
+  - name: '18.9.38.2 - RestrictRemoteClients'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Rpc'
+      valueName: 'RestrictRemoteClients'
+      valueData:
+        DWord: 1
+  # Section: 18.9.49.5
+  # Title: Ensure 'Microsoft Support Diagnostic Tool: Turn on MSDT interactive communication with support provider' is set to 'Disabled'
+  - name: '18.9.49.5.1 - DisableQueryRemoteServer'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\ScriptedDiagnosticsProvider\Policy'
+      valueName: 'DisableQueryRemoteServer'
+      valueData:
+        DWord: 0
+  # Section: 18.9.49.11
+  # Title: Ensure 'Enable/Disable PerfTrack' is set to 'Disabled'
+  - name: '18.9.49.11.1 - ScenarioExecutionEnabled'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WDI\{9c5a40da-b965-4fc3-8781-88dd50a6299d}'
+      valueName: 'ScenarioExecutionEnabled'
+      valueData:
+        DWord: 0
+  # Section: 18.9.51
+  # Title: Ensure 'Turn off the advertising ID' is set to 'Enabled'
+  - name: '18.9.51.1 - DisabledByGroupPolicy'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo'
+      valueName: 'DisabledByGroupPolicy'
+      valueData:
+        DWord: 1
+  # Section: 18.10.4
+  # Title: Ensure 'Allow a Windows app to share application data between users' is set to 'Disabled'
+  - name: '18.10.4.1 - AllowSharedLocalAppData'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\AppModel\StateManager'
+      valueName: 'AllowSharedLocalAppData'
+      valueData:
+        DWord: 0
+  # Section: 18.10.11
+  # Title: Ensure 'Allow Use of Camera' is set to 'Disabled'
+  - name: '18.10.11.1 - AllowCamera'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Camera'
+      valueName: 'AllowCamera'
+      valueData:
+        DWord: 0
+  # Section: 18.10.13
+  # Title: Ensure 'Turn off cloud optimized content' is set to 'Enabled'
+  - name: '18.10.13.2 - DisableCloudOptimizedContent'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\CloudContent'
+      valueName: 'DisableCloudOptimizedContent'
+      valueData:
+        DWord: 1
+  # Section: 18.10.16
+  # Title: Ensure 'Configure Authenticated Proxy usage for the Connected User Experience and Telemetry service' is set to 'Enabled: Disable Authenticated Proxy usage'
+  - name: '18.10.16.2 - DisableEnterpriseAuthProxy'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection'
+      valueName: 'DisableEnterpriseAuthProxy'
+      valueData:
+        DWord: 1
+  # Section: 18.10.16
+  # Title: Ensure 'Enable OneSettings Auditing' is set to 'Enabled'
+  - name: '18.10.16.4 - EnableOneSettingsAuditing'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection'
+      valueName: 'EnableOneSettingsAuditing'
+      valueData:
+        DWord: 1
+  # Section: 18.10.16
+  # Title: Ensure 'Limit Diagnostic Log Collection' is set to 'Enabled'
+  - name: '18.10.16.5 - LimitDiagnosticLogCollection'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection'
+      valueName: 'LimitDiagnosticLogCollection'
+      valueData:
+        DWord: 1
+  # Section: 18.10.16
+  # Title: Ensure 'Limit Dump Collection' is set to 'Enabled'
+  - name: '18.10.16.6 - LimitDumpCollection'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection'
+      valueName: 'LimitDumpCollection'
+      valueData:
+        DWord: 1
+  # Section: 18.10.18
+  # Title: Ensure 'Enable App Installer' is set to 'Disabled'
+  - name: '18.10.18.1 - EnableAppInstaller'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppInstaller'
+      valueName: 'EnableAppInstaller'
+      valueData:
+        DWord: 0
+  # Section: 18.10.18
+  # Title: Ensure 'Enable Windows Package Manager command line interfaces' is set to 'Disabled'
+  - name: '18.10.18.7 - EnableWindowsPackageManagerCommandLineInterfaces'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppInstaller'
+      valueName: 'EnableWindowsPackageManagerCommandLineInterfaces'
+      valueData:
+        DWord: 0
+  # Section: 18.10.36
+  # Title: Ensure 'Turn off location' is set to 'Enabled'
+  - name: '18.10.36.1 - DisableLocation'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors'
+      valueName: 'DisableLocation'
+      valueData:
+        DWord: 1
+  # Section: 18.10.40
+  # Title: Ensure 'Allow Message Service Cloud Sync' is set to 'Disabled'
+  - name: '18.10.40.1 - AllowMessageSync'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Messaging'
+      valueName: 'AllowMessageSync'
+      valueData:
+        DWord: 0
+  # Section: 18.10.42.8
+  # Title: Ensure 'Convert warn verdict to block' is set to 'Enabled'
+  - name: '18.10.42.8.1 - EnableConvertWarnToBlock'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\NIS'
+      valueName: 'EnableConvertWarnToBlock'
+      valueData:
+        DWord: 1
+  # Section: 18.10.42.11.1.1
+  # Title: Ensure 'Configure Brute-Force Protection aggressiveness' is set to 'Enabled: Medium' or higher
+  - name: '18.10.42.11.1.1.1 - BruteForceProtectionAggressiveness'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Remediation\Behavioral Network Blocks\Brute Force Protection'
+      valueName: 'BruteForceProtectionAggressiveness'
+      valueData:
+        DWord: 1
+  # Section: 18.10.42.11.1.2
+  # Title: Ensure 'Configure how aggressively Remote Encryption Protection blocks threats' is set to 'Enabled: Medium' or higher
+  - name: '18.10.42.11.1.2.1 - RemoteEncryptionProtectionAggressiveness'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Remediation\Behavioral Network Blocks\Remote Encryption Protection'
+      valueName: 'RemoteEncryptionProtectionAggressiveness'
+      valueData:
+        DWord: 1
+  # Section: 18.10.42.12
+  # Title: Ensure 'Configure Watson events' is set to 'Disabled'
+  - name: '18.10.42.12.1 - DisableGenericRePorts'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Reporting'
+      valueName: 'DisableGenericRePorts'
+      valueData:
+        DWord: 1
+  # Section: 18.10.56
+  # Title: Ensure 'Turn off Push To Install service' is set to 'Enabled'
+  - name: '18.10.56.1 - DisablePushToInstall'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\PushToInstall'
+      valueName: 'DisablePushToInstall'
+      valueData:
+        DWord: 1
+  # Section: 18.10.57.3.2
+  # Title: Ensure 'Restrict Remote Desktop Services users to a single Remote Desktop Services session' is set to 'Enabled'
+  - name: '18.10.57.3.2.1 - fSingleSessionPerUser'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
+      valueName: 'fSingleSessionPerUser'
+      valueData:
+        DWord: 1
+  # Section: 18.10.57.3.3
+  # Title: Ensure 'Allow UI Automation redirection' is set to 'Disabled'
+  - name: '18.10.57.3.3.1 - EnableUiaRedirection'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
+      valueName: 'EnableUiaRedirection'
+      valueData:
+        DWord: 0
+  # Section: 18.10.57.3.3
+  # Title: Ensure 'Do not allow COM port redirection' is set to 'Enabled'
+  - name: '18.10.57.3.3.2 - fDisableCcm'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
+      valueName: 'fDisableCcm'
+      valueData:
+        DWord: 1
+  # Section: 18.10.57.3.3
+  # Title: Ensure 'Do not allow location redirection' is set to 'Enabled'
+  - name: '18.10.57.3.3.4 - fDisableLocationRedir'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
+      valueName: 'fDisableLocationRedir'
+      valueData:
+        DWord: 1
+  # Section: 18.10.57.3.3
+  # Title: Ensure 'Do not allow LPT port redirection' is set to 'Enabled'
+  - name: '18.10.57.3.3.5 - fDisableLPT'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
+      valueName: 'fDisableLPT'
+      valueData:
+        DWord: 1
+  # Section: 18.10.57.3.3
+  # Title: Ensure 'Do not allow supported Plug and Play device redirection' is set to 'Enabled'
+  - name: '18.10.57.3.3.6 - fDisablePNPRedir'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
+      valueName: 'fDisablePNPRedir'
+      valueData:
+        DWord: 1
+  # Section: 18.10.57.3.3
+  # Title: Ensure 'Do not allow WebAuthn redirection' is set to 'Enabled'
+  - name: '18.10.57.3.3.7 - fDisableWebAuthn'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
+      valueName: 'fDisableWebAuthn'
+      valueData:
+        DWord: 1
+  # Section: 18.10.57.3.3
+  # Title: Ensure 'Restrict clipboard transfer from server to client' is set to 'Enabled: Disable clipboard transfers from server to client'
+  - name: '18.10.57.3.3.8 - SCClipLevel'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
+      valueName: 'SCClipLevel'
+      valueData:
+        DWord: 0
+  # Section: 18.10.57.3.10
+  # Title: Ensure 'Set time limit for active but idle Remote Desktop Services sessions' is set to 'Enabled: 15 minutes or less, but not Never (0)'
+  - name: '18.10.57.3.10.1 - MaxIdleTime'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
+      valueName: 'MaxIdleTime'
+  # Section: 18.10.57.3.10
+  # Title: Ensure 'Set time limit for disconnected sessions' is set to 'Enabled: 1 minute'
+  - name: '18.10.57.3.10.2 - MaxDisconnectionTime'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
+      valueName: 'MaxDisconnectionTime'
+      valueData:
+        DWord: 60000
+  # Section: 18.10.59
+  # Title: Ensure 'Allow Cloud Search' is set to 'Enabled: Disable Cloud Search'
+  - name: '18.10.59.2 - AllowCloudSearch'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search'
+      valueName: 'AllowCloudSearch'
+      valueData:
+        DWord: 0
+  # Section: 18.10.59
+  # Title: Ensure 'Allow search highlights' is set to 'Disabled'
+  - name: '18.10.59.4 - EnableDynamicContentInWSB'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search'
+      valueName: 'EnableDynamicContentInWSB'
+      valueData:
+        DWord: 0
+  # Section: 18.10.63
+  # Title: Ensure 'Turn off KMS Client Online AVS Validation' is set to 'Enabled'
+  - name: '18.10.63.1 - NoGenTicket'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform'
+      valueName: 'NoGenTicket'
+      valueData:
+        DWord: 1
+  # Section: 18.10.81
+  # Title: Ensure 'Allow suggested apps in Windows Ink Workspace' is set to 'Disabled'
+  - name: '18.10.81.1 - AllowSuggestedAppsInWindowsInkWorkspace'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsInkWorkspace'
+      valueName: 'AllowSuggestedAppsInWindowsInkWorkspace'
+      valueData:
+        DWord: 0
+  # Section: 18.10.82
+  # Title: Ensure 'Prevent Internet Explorer security prompt for Windows Installer scripts' is set to 'Disabled'
+  - name: '18.10.82.3 - SafeForScripting'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Installer'
+      valueName: 'SafeForScripting'
+      valueData:
+        DWord: 0
+  # Section: 18.10.88
+  # Title: Ensure 'Turn on PowerShell Script Block Logging' is set to 'Enabled'
+  - name: '18.10.88.1 - EnableScriptBlockLogging'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging'
+      valueName: 'EnableScriptBlockLogging'
+      valueData:
+        DWord: 1
+  # Section: 18.10.88
+  # Title: Ensure 'Turn on PowerShell Transcription' is set to 'Enabled'
+  - name: '18.10.88.2 - EnableTranscripting'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\PowerShell\Transcription'
+      valueName: 'EnableTranscripting'
+      valueData:
+        DWord: 1
+  # Section: 18.10.90.2
+  # Title: Ensure 'Allow remote server management through WinRM' is set to 'Disabled'
+  - name: '18.10.90.2.2 - AllowAutoConfig'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service'
+      valueName: 'AllowAutoConfig'
+      valueData:
+        DWord: 0
+  # Section: 18.10.91
+  # Title: Ensure 'Allow Remote Shell Access' is set to 'Disabled'
+  - name: '18.10.91.1 - AllowRemoteShellAccess'
+    type: Microsoft.Windows/Registry
+    properties:
+      _exist: true
+      keyPath: 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WinRM\Service\WinRS'
+      valueName: 'AllowRemoteShellAccess'
+      valueData:
+        DWord: 0
